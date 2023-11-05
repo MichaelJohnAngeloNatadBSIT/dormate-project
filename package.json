@@ -1,0 +1,17 @@
+{
+  "name": "frontend-dormate",
+  "version": "1.0.0",
+  "description": "frontend of dormate using MongoDB, ExpressJS, AngularJS, NodeJS",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "angularjs",
+    "nodejs",
+    "expressjs",
+    "mongodb"
+  ],
+  "author": "e-Tech",
+  "license": "ISC"
+}
