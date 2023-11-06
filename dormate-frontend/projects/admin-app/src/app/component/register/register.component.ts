@@ -1,6 +1,6 @@
 import { Component, OnInit  } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/services/auth.service';
+import { AuthService } from 'projects/admin-app/services/auth.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -16,10 +16,11 @@ export class RegisterComponent implements OnInit {
     username: null,
     first_name: null,
     last_name: null,
-    address: null,
+    // address: null,
     email: null,
     password: null,
-    confirmPassword: null
+    mobile_number: null
+    // confirmPassword: null
   };
   isSuccessful = false;
   isSignUpFailed = false;
@@ -38,7 +39,7 @@ export class RegisterComponent implements OnInit {
       password: new FormControl('', [Validators.required, Validators.minLength(8)]),
       first_name: new FormControl('', [Validators.required, Validators.maxLength(60)]),
       last_name: new FormControl('', [Validators.required, Validators.maxLength(60)]),
-      address: new FormControl('', [Validators.required, Validators.maxLength(100)]),
+      // address: new FormControl('', [Validators.required, Validators.maxLength(100)]),
       mobile_number: new FormControl('', [Validators.required, Validators.maxLength(12)]),
 
       //confirmPassword: new FormControl('', Validators.required),
@@ -74,7 +75,5 @@ export class RegisterComponent implements OnInit {
   public hasError = (controlName: string, errorName: string) =>{
     return this.form.controls[controlName].hasError(errorName);
     }
-
-
 
 }

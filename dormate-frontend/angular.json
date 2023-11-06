@@ -98,6 +98,97 @@
           }
         }
       }
+    },
+    "adminApp": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "projects/admin-app",
+      "sourceRoot": "projects/admin-app/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/admin-app",
+            "index": "projects/admin-app/src/index.html",
+            "main": "projects/admin-app/src/main.ts",
+            "polyfills": [
+              "zone.js"
+            ],
+            "tsConfig": "projects/admin-app/tsconfig.app.json",
+            "assets": [
+              "projects/admin-app/src/favicon.ico",
+              "projects/admin-app/src/assets"
+            ],
+            "styles": [
+              "projects/admin-app/src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "adminApp:build:production"
+            },
+            "development": {
+              "browserTarget": "adminApp:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "adminApp:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ],
+            "tsConfig": "projects/admin-app/tsconfig.spec.json",
+            "assets": [
+              "projects/admin-app/src/favicon.ico",
+              "projects/admin-app/src/assets"
+            ],
+            "styles": [
+              "projects/admin-app/src/styles.css"
+            ],
+            "scripts": []
+          }
+        }
+      }
     }
   },
   "cli": {

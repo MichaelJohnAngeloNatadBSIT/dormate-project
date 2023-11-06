@@ -1,14 +1,13 @@
 import { Component, OnInit  } from '@angular/core';
-import { AuthService } from 'src/app/services/auth.service';
-import { TokenStorageService } from 'src/app/services/token-storage.service';
+import { AuthService } from 'projects/admin-app/services/auth.service';
+import { StorageService } from 'projects/admin-app/services/storage.service';
 import { Router, RouterModule, Routes } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
   form: any = {
@@ -26,14 +25,14 @@ export class LoginComponent implements OnInit {
   isSignUpFailed = false;
 
   constructor(private authService: AuthService, 
-              private tokenStorage: TokenStorageService,
+              private storageService: StorageService,
               private router: Router,
               ) { }
 
   ngOnInit(): void {
-    if (this.tokenStorage.isLoggedIn()) {
+    if (this.storageService.isLoggedIn()) {
       this.isLoggedIn = true;
-      this.roles = this.tokenStorage.getUser().roles;
+      this.roles = this.storageService.getUser().roles;
     }
 
     this.form = new FormGroup({
@@ -47,13 +46,13 @@ export class LoginComponent implements OnInit {
 
     this.authService.login(username, password).subscribe({
       next: data => {
-        this.tokenStorage.saveUser(data);
+        this.storageService.saveUser(data);
 
         this.isLoginFailed = false;
         this.isLoggedIn = true;
-        this.roles = this.tokenStorage.getUser().roles;
+        this.roles = this.storageService.getUser().roles;
         
-        this.router.navigate(['/dorms']);
+        this.router.navigate(['/admin-dashboard']);
         this.authService.isUserLoggedIn.next(true);
      
       },
@@ -75,7 +74,4 @@ export class LoginComponent implements OnInit {
   public formError = (controlName: string, errorName: string) =>{
     return this.form.controls[controlName].hasError(errorName);
     }
-
-
-  
 }

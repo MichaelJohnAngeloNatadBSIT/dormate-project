@@ -7,11 +7,11 @@ const Admin = mongoose.model(
     username: String,
     email: String,
     password: String,
-    address: String,
+    // address: String,
     first_name: String,
     last_name: String,
-    user_image: String,
-    image_id: String,
+    // user_image: String,
+    // image_id: String,
     mobile_number: String,
     roles: [
         {

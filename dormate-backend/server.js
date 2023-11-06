@@ -8,17 +8,15 @@ const app = express();
 
 global.__basedir = __dirname;
 
-// origin: "http://localhost:8081",  origin: "http://192.168.1.178:8081", 192.168.1.209   origin: "http://localhost:8081",
 var corsOptions = {
 
-  origin: ["http://192.168.1.178:8081", "http://localhost:8081"],
+  origin: ["http://192.168.1.178:8081", "http://192.168.1.178:8082", "http://localhost:8081", "http://localhost:8082"],
   credentials: true
 };
 
 app.use(cors(corsOptions));
 
 // const initRoutes = require("./app/routes");
-
 // initRoutes(app); 
 
 // parse requests of content-type - application/json
@@ -30,7 +28,6 @@ app.use("/public", express.static("public"));
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
 
-// initRoutes(app);
 
 app.use(
   cookieSession({

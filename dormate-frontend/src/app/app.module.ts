@@ -33,6 +33,7 @@ import { EditDormInfoDialogComponent } from './components/edit-dorm-info-dialog/
 import { DeleteDormDialogComponent } from './components/delete-dorm-dialog/delete-dorm-dialog.component';
 import { EventDialogComponent } from './event/event-dialog/event-dialog.component';
 import { EventInterceptor} from './event/event-interceptor.interceptor';
+// import { ChartModule}
 
 
 @NgModule({
@@ -68,7 +69,8 @@ import { EventInterceptor} from './event/event-interceptor.interceptor';
     AngularMaterialModule,
     FlexLayoutModule,
     ReactiveFormsModule,
-    NgxUsefulSwiperModule
+    NgxUsefulSwiperModule,
+
   ],
   providers: [
               authInterceptorProviders, 

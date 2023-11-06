@@ -17,6 +17,7 @@ import { BoardUserComponent } from './components/board-user/board-user.component
 import { BoardAdminComponent } from './components/board-admin/board-admin.component';
 import { BoardLandlordComponent } from './components/board-landlord/board-landlord.component';
 import { CertificateUploadDialogComponent } from './components/certificate-upload-dialog/certificate-upload-dialog.component';
+// import { AdminApp } from 'projects/admin-app/src/app/app.module';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dorms', pathMatch: 'full'},
@@ -29,6 +30,7 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent },
   { path: 'user', component: BoardUserComponent },
   { path: 'landlord', component: BoardLandlordComponent },
+  // { path: 'admin', component: AdminApp },
   // { path: 'admin', component: BoardAdminComponent },
   // { path: '', redirectTo: 'home', pathMatch: 'full' }
 
@@ -36,7 +38,10 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes), 
+    // AdminApp.forRoot()
+  ],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

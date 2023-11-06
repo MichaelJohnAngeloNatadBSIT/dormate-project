@@ -2,11 +2,10 @@ import { Component } from '@angular/core';
 import { ResponsiveService } from './responsive/responsive.service';
 import { TokenStorageService } from './services/token-storage.service';
 import { AuthService } from './services/auth.service';
-import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
 import { User } from './interface/user';
 
-const USER_KEY = 'auth-user';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -33,9 +32,7 @@ export class AppComponent {
     public responsiveService:ResponsiveService, 
     private tokenStorageService: TokenStorageService,
     private authService: AuthService,
-    private userService: UserService,
     public router: Router,
-    private tokenService: TokenStorageService,
     ) {
       this.authService.isUserLoggedIn.subscribe( value => {
         this.isUserLoggedIn = value;
