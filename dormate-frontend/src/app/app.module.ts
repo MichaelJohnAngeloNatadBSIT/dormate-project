@@ -71,7 +71,7 @@ import { MatTableModule } from '@angular/material/table';
     FlexLayoutModule,
     ReactiveFormsModule,
     NgxUsefulSwiperModule,
-    FontAwesomeModule,
+    // FontAwesomeModule,
     MatTableModule,
 
   ],

@@ -161,6 +161,17 @@ main {
   text-transform: uppercase;
 }
 
+.sidebar__logout > a:hover {
+  color: #ac404d;
+  cursor: pointer;
+}
+
+.sidebar__logout > i:hover {
+  color: #ac404d;
+  cursor: pointer;
+}
+
+
 .sidebar__logout > i {
   margin-right: 10px;
   font-size: 18px;
@@ -215,3 +226,4 @@ main {
     display: none;
   }
 }
+
