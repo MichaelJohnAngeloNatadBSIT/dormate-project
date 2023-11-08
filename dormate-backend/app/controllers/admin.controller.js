@@ -2,6 +2,8 @@ const config = require("../config/admin.auth.config");
 const db = require("../models");
 const Admin = db.admin;
 const Role = db.role;
+const User = db.user;
+const Dorm = db.dormitory;
 
 var jwt = require("jsonwebtoken");
 var bcrypt = require("bcryptjs");
@@ -132,6 +134,169 @@ exports.signout = async (req, res) => {
     this.next(err);
   }
 };
+
+
+// Create and Save a new Dormitory
+exports.createDorm = (req, res) => {
+  // Validate request
+  if (!req.body.title) {
+    res.status(400).send({ message: "Content can not be empty!" });
+    return;
+  }
+
+  // Create a Dorm
+  const dormitory = new Dormitory({
+    user_id: req.body.user_id,
+    title: req.body.title,
+    description: req.body.description,
+    address: req.body.address,
+    lessor: req.body.lessor,
+    bedroom: req.body.bedroom,
+    bathroom: req.body.bathroom,
+    rent: req.body.rent,
+    for_rent: req.body.for_rent ? req.body.for_rent : false,
+    dorm_images: req.body.dorm_images,
+    publish: false,
+  });
+
+  // Save Dorm in the database
+  dormitory
+    .save(dormitory)
+    .then((data) => {
+      res.send({
+        message: "Dormitory post was created successfully.",
+      });
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while creating the Dormitory.",
+      });
+    });
+};
+
+// Retrieve All User
+exports.retrieveAllUser = (req, res) => {
+  const id = req.params.id;
+
+  User.find()
+    .then((data) => {
+      if (!data)
+        res.status(404).send({ message: "There are currently no user."});
+      else res.send(data);
+    })
+    .catch((err) => {
+      res.status(500).send({ message: "Error retrieving User" });
+    });
+};
+
+// Retrieve All Dorm
+exports.retrieveAllDorm = (req, res) => {
+  const id = req.params.id;
+
+  Dorm.find()
+    .then((data) => {
+      if (!data)
+        res.status(404).send({ message: "There are currently no dorm."});
+      else res.send(data);
+    })
+    .catch((err) => {
+      res.status(500).send({ message: "Error retrieving Dorms" });
+    });
+};
+
+// Edit details of a User by the id in the request
+exports.updateUser = (req, res) => {
+  const id = req.params.id;
+
+  User.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
+    .then((data) => {
+      if (!data) {
+        res.status(404).send({
+          message: `Cannot update User with id=${id}. Maybe User was not found!`,
+        });
+      } else res.send({ message: "User was updated successfully." });
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: "Error updating User with id=" + id,
+      });
+    });
+};
+
+exports.updateDorm = (req, res) => {
+  if (!req.body) {
+    return res.status(400).send({
+      message: "Dorm information to update can not be empty!"
+    });
+  }
+
+  const id = req.params.id;
+
+  Dorm.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
+    .then(data => {
+      if (!data) {
+        res.status(404).send({
+          message: `Cannot update Dorm with id=${id}. Maybe Dorm was not found!`
+        });
+      } else res.send({ message: "Dorm was updated successfully." });
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Error updating Dorm with id=" + id
+      });
+    });
+};
+
+// Delete a Dormitory with the specified id in the request
+exports.deleteUserById = (req, res) => {
+  const id = req.params.id;
+
+  Dormitory.findByIdAndRemove(id)
+    .then((data) => {
+      if (!data) {
+        res.status(404).send({
+          message: `Cannot delete Dormitory with id=${id}. Maybe Dormitory was not found!`,
+        });
+      } else {
+        res.send({
+          message: "Dormitory was deleted successfully!",
+        });
+      }
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: "Could not delete Dormitory with id=" + id,
+      });
+    });
+};
+
+
+// Delete a Dormitory with the specified id in the request
+exports.deleteDormById = (req, res) => {
+  const id = req.params.id;
+
+  Dormitory.findByIdAndRemove(id)
+    .then((data) => {
+      if (!data) {
+        res.status(404).send({
+          message: `Cannot delete Dormitory with id=${id}. Maybe Dormitory was not found!`,
+        });
+      } else {
+        res.send({
+          message: "Dormitory was deleted successfully!",
+        });
+      }
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: "Could not delete Dormitory with id=" + id,
+      });
+    });
+};
+
+
+
 
 
 

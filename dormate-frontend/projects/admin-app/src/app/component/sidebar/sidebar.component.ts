@@ -1,43 +1,41 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { StorageService } from 'projects/admin-app/services/storage.service';
 import { AuthService } from 'projects/admin-app/services/auth.service';
+import { Admin } from 'projects/admin-app/interface/admin';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: 'app-sidebar',
+  templateUrl: './sidebar.component.html',
+  styleUrls: ['./sidebar.component.css']
 })
-export class AppComponent {
-  private roles: string[] = [];
+export class SidebarComponent implements OnInit {
+  // private roles: string[] = [];
   isLoggedIn = false;
   showAdminBoard = false;
   showModeratorBoard = false;
   username?: string;
-
+  admin: Admin
   isUserLoggedIn: boolean;
+  status = false;
 
   constructor(private storageService: StorageService, private authService: AuthService) { 
     this.authService.isUserLoggedIn.subscribe( value => {
       this.isUserLoggedIn = value;
   });
   }
-  status = false;
-  addToggle(){
-    this.status = !this.status;       
-  }
 
   ngOnInit(): void {
     this.isLoggedIn = this.storageService.isLoggedIn();
-
     if (this.isLoggedIn) {
-      const user = this.storageService.getUser();
-      this.roles = user.roles;
+      this.admin = this.storageService.getUser();
+      // this.roles = this.admin.roles;
 
-      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
-      this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
+      // this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
+      // this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
 
-      this.username = user.username;
+      this.username = this.admin.username;
     }
+    console.log(this.isLoggedIn);
   }
 
   logout(): void {
@@ -53,4 +51,9 @@ export class AppComponent {
       }
     });
   }
+
+  addToggle(){
+    this.status = !this.status;       
+  }
+
 }

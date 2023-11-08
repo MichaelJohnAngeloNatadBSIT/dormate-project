@@ -52,7 +52,7 @@ export class LoginComponent implements OnInit {
         this.isLoggedIn = true;
         this.roles = this.storageService.getUser().roles;
         
-        this.router.navigate(['/admin-dashboard']);
+        this.router.navigate(['/dashboard-nav']);
         this.authService.isUserLoggedIn.next(true);
      
       },

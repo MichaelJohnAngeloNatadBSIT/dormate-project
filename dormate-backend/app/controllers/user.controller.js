@@ -191,7 +191,7 @@ exports.retrieveUser = (req, res) => {
     });
 };
 
-// Update a Dorm by the id in the request
+// Edit details of a User by the id in the request
 exports.updateUser = (req, res) => {
   const id = req.params.id;
 

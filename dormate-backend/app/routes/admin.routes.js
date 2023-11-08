@@ -10,13 +10,21 @@ module.exports = function (app) {
   app.post(
     "/api/admin/signup",
     [
-        verifyAdminSignUp.checkDuplicateUsernameOrEmail,
-        verifyAdminSignUp.checkRolesExisted,
+      verifyAdminSignUp.checkDuplicateUsernameOrEmail,
+      verifyAdminSignUp.checkRolesExisted,
     ],
     controller.signup
   );
 
   app.post("/api/admin/signin", controller.signin);
-
   app.post("/api/admin/signout", controller.signout);
+
+  app.get("/api/admin/all_user", controller.retrieveAllUser);
+  app.put("/api/admin/update_user/:id", controller.updateUser)
+  app.delete("/api/admin/delete_user", controller.deleteUserById)
+
+  app.get("/api/admin/all_dorm", controller.retrieveAllDorm);
+  app.post("/api/admin/create_dorm", controller.createDorm);
+  app.put("/api/admin/update_dorm/:id", controller.updateDorm)
+  app.delete("/api/admin/delete_delete/:id", controller.deleteDormById)
 };

@@ -33,7 +33,10 @@ import { EditDormInfoDialogComponent } from './components/edit-dorm-info-dialog/
 import { DeleteDormDialogComponent } from './components/delete-dorm-dialog/delete-dorm-dialog.component';
 import { EventDialogComponent } from './event/event-dialog/event-dialog.component';
 import { EventInterceptor} from './event/event-interceptor.interceptor';
-// import { ChartModule}
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { MatTableModule } from '@angular/material/table';
+
+
 
 
 @NgModule({
@@ -57,8 +60,6 @@ import { EventInterceptor} from './event/event-interceptor.interceptor';
     EditDormInfoDialogComponent,
     DeleteDormDialogComponent,
     EventDialogComponent,
-    
-
   ],
   imports: [
     BrowserModule,
@@ -70,13 +71,15 @@ import { EventInterceptor} from './event/event-interceptor.interceptor';
     FlexLayoutModule,
     ReactiveFormsModule,
     NgxUsefulSwiperModule,
+    FontAwesomeModule,
+    MatTableModule,
 
   ],
   providers: [
               authInterceptorProviders, 
               {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
               {provide: HTTP_INTERCEPTORS, useClass: EventInterceptor, multi: true},
-              {provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true}
+              {provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true},
             ],
   bootstrap: [AppComponent],
   entryComponents: [ErrorComponent, EventDialogComponent]
