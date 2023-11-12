@@ -33,7 +33,6 @@ import { EditDormInfoDialogComponent } from './components/edit-dorm-info-dialog/
 import { DeleteDormDialogComponent } from './components/delete-dorm-dialog/delete-dorm-dialog.component';
 import { EventDialogComponent } from './event/event-dialog/event-dialog.component';
 import { EventInterceptor} from './event/event-interceptor.interceptor';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatTableModule } from '@angular/material/table';
 
 
@@ -71,7 +70,6 @@ import { MatTableModule } from '@angular/material/table';
     FlexLayoutModule,
     ReactiveFormsModule,
     NgxUsefulSwiperModule,
-    // FontAwesomeModule,
     MatTableModule,
 
   ],

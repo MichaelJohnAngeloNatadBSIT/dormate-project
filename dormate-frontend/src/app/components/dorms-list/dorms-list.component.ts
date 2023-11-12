@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Dorm } from 'src/app/models/dorms.model';
 import { DormService } from 'src/app/services/dorm.service';
-import { UserService } from 'src/app/services/user.service';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 import { User } from 'src/app/interface/user';
 import { SwiperOptions } from 'swiper';
@@ -11,7 +10,7 @@ import { SwiperOptions } from 'swiper';
   templateUrl: './dorms-list.component.html',
   styleUrls: ['./dorms-list.component.css']
 })
-export class DormsListComponent implements OnInit     {
+export class DormsListComponent implements OnInit{
   content?: string;
 
   dorms?: Dorm[];
@@ -23,7 +22,6 @@ export class DormsListComponent implements OnInit     {
 
   constructor(
     private dormService: DormService, 
-    private userService: UserService,
     private tokenService: TokenStorageService
     ) { }
   
@@ -32,6 +30,7 @@ export class DormsListComponent implements OnInit     {
     this.retrieveDorms();
     this.currentUser = this.tokenService.getUser();
     // this.retrieveUser();
+
   }
 
   // retrieveUser(){
@@ -45,7 +44,7 @@ export class DormsListComponent implements OnInit     {
   // }
 
     retrieveDorms(): void {
-      this.dormService.getAll()
+      this.dormService.getAllApproved()
         .subscribe({
           next: (data) => {
             this.dorms = data;

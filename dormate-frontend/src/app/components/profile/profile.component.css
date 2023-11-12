@@ -64,11 +64,12 @@ body{
     height: 150px;
 
 }
+
 .dorm_image{
     width: 100%;
     max-width: 700px;
     height: 300px;
-  }
+}
 
 .dialog-button{
     margin: 5px 10px 5px;

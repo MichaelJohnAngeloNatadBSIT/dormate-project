@@ -61,22 +61,21 @@
       [class.active]="i == currentIndex"
       (click)="setActiveDorm(dorm, i)"
     >
-    <!-- image slider -->
+      <!-- image slider -->
       <swiper [config]="config">
         <div class="swiper-wrapper">
           <div class="swiper-slide" *ngFor="let image of dorm.dorm_images">
-            <img src="{{ image }}" alt="img 1" class="dorm_image">
+            <img src="{{ image }}" alt="img 1" class="dorm_image" />
           </div>
         </div>
-       
+
         <!-- Add Pagination -->
         <div class="swiper-pagination"></div>
-       
+
         <!-- Add Arrows -->
         <div class="swiper-button-next"></div>
         <div class="swiper-button-prev"></div>
       </swiper>
-    
 
       <div class="w3-container w3-white">
         <h3>{{ dorm.title }}</h3>

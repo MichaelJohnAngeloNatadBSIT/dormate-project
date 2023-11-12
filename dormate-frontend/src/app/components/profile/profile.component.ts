@@ -70,11 +70,11 @@ export class ProfileComponent implements OnInit {
     let dialogRef = this.dialog.open(EditDialogComponent, { 
       width: '700px', 
       height: '80vh',
+      data: this.user
     }); 
     dialogRef.afterClosed().subscribe(result => { 
       window.location.reload();
      }); 
-
   }
 
   openUserImageDialog(): void {
@@ -115,6 +115,7 @@ export class ProfileComponent implements OnInit {
       data: dorm
     }); 
   }
+  
   openDeleteDormDialog(dorm: Dorm): void {
     let dialogRef = this.dialog.open(DeleteDormDialogComponent, { 
       data: dorm

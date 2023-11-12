@@ -19,6 +19,10 @@ export class DormService {
     return this.http.get<Dorm[]>(baseUrl);
   }
 
+  getAllApproved(): Observable<Dorm[]>{
+    return this.http.get<Dorm[]>(`${baseUrl}/find_all_approved/`);
+  }
+
   getForApproval(id: any): Observable<Dorm[]>{
     return this.http.get<Dorm[]>(`${baseUrl}/for_approval/${id}`);
   }

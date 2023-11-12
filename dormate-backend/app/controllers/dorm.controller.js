@@ -532,8 +532,29 @@ exports.downloadCert = async (req, res) => {
 exports.findAll = (req, res) => {
   const title = req.query.title;
   var condition = title
-    ? { title: { $regex: new RegExp(title), $options: "i" } }
+    ? { 
+      title: { $regex: new RegExp(title), $options: "i" },
+      publish: true
+    }
     : {};
+
+  Dormitory.find(condition)
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving dormitory.",
+      });
+    });
+};
+
+//find all dorm posts that are approved
+exports.findAllApproved = (req, res) => {
+  var condition = { 
+      publish: true
+    };
 
   Dormitory.find(condition)
     .then((data) => {

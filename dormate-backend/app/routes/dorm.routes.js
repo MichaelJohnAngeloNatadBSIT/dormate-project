@@ -9,6 +9,9 @@ module.exports = app => {
   // Retrieve all Dormitory
   router.get("/", dormitory.findAll);
 
+  // Retrieve all Dormitory
+  router.get("/find_all_approved", dormitory.findAllApproved);
+
   // Retrieve all for rent Dormitory
   router.get("/for_rent", dormitory.findAllForRent);
 

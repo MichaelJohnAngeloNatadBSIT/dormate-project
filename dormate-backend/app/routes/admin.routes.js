@@ -21,10 +21,11 @@ module.exports = function (app) {
 
   app.get("/api/admin/all_user", controller.retrieveAllUser);
   app.put("/api/admin/update_user/:id", controller.updateUser)
-  app.delete("/api/admin/delete_user", controller.deleteUserById)
+  app.delete("/api/admin/delete_user/:id", controller.deleteUserById)
 
   app.get("/api/admin/all_dorm", controller.retrieveAllDorm);
+  app.get("/api/admin/find_one/:id", controller.findOne);
   app.post("/api/admin/create_dorm", controller.createDorm);
   app.put("/api/admin/update_dorm/:id", controller.updateDorm)
-  app.delete("/api/admin/delete_delete/:id", controller.deleteDormById)
+  app.delete("/api/admin/delete_dorm/:id", controller.deleteDormById)
 };

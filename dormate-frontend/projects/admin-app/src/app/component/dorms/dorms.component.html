@@ -1,78 +1,25 @@
-<mat-card>
-    <mat-card-header>
-      <h1 class="user-header">Dorm Posts for Approval</h1>
-    </mat-card-header>
-    <mat-card-content>
-      <div class="example-container mat-elevation-z8">
-        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-          <ng-container matColumnDef="_id">
-            <th mat-header-cell *matHeaderCellDef class="table-header">User Id</th>
-            <td mat-cell *matCellDef="let dorm"><span>{{ dorm._id }}</span></td>
-          </ng-container>
-      
-          <ng-container matColumnDef="user_id">
-            <th mat-header-cell *matHeaderCellDef class="table-header">User Id</th>
-            <td mat-cell *matCellDef="let dorm"><span>{{ dorm.user_id }}</span></td>
-          </ng-container>
-      
-          <!-- Name Column -->
-          <ng-container matColumnDef="title">
-            <th mat-header-cell *matHeaderCellDef class="table-header">Title</th>
-            <td mat-cell *matCellDef="let dorm"><span>{{ dorm.title }}</span></td>
-          </ng-container>
-
-          <ng-container matColumnDef="description">
-            <th mat-header-cell *matHeaderCellDef class="table-header">Description</th>
-            <td mat-cell *matCellDef="let dorm"><span>{{ dorm.description }}</span></td>
-          </ng-container>
-      
-          <ng-container matColumnDef="address">
-            <th mat-header-cell *matHeaderCellDef class="table-header">Address</th>
-            <td mat-cell *matCellDef="let dorm"><span>{{ dorm.address }}</span></td>
-          </ng-container>
-      
-          <ng-container matColumnDef="lessor_name">
-            <th mat-header-cell *matHeaderCellDef class="table-header">Lessor Name</th>
-            <td mat-cell *matCellDef="let dorm"><span>{{ dorm.lessor }}</span></td>
-          </ng-container>
-      
-          <!-- <ng-container matColumnDef="number_of_bedroom">
-            <th mat-header-cell *matHeaderCellDef class="table-header">Number of Bedroom</th>
-            <td mat-cell *matCellDef="let dorm"><span>{{ dorm.bedroom }}</span></td>
-          </ng-container>
-      
-          <ng-container matColumnDef="number_of_bathroom">
-            <th mat-header-cell *matHeaderCellDef class="table-header">Number of Bathroom</th>
-            <td mat-cell *matCellDef="let dorm"><span>{{ dorm.bathroom }}</span></td>
-          </ng-container> -->
-
-          <ng-container matColumnDef="rent">
-            <th mat-header-cell *matHeaderCellDef class="user-header">Rent Fee</th>
-            <td mat-cell *matCellDef="let dorm"><span>{{ dorm.rent }}</span></td>
-          </ng-container>
-
-          <ng-container matColumnDef="for_rent">
-            <th mat-header-cell *matHeaderCellDef class="user-header">Rent Status</th>
-            <td mat-cell *matCellDef="let dorm"><span>{{ dorm.for_rent }}</span></td>
-          </ng-container>
-
-          <ng-container matColumnDef="publish">
-            <th mat-header-cell *matHeaderCellDef class="user-header">Publish Status</th>
-            <td mat-cell *matCellDef="let dorm"><span>{{ dorm.publish }}</span></td>
-          </ng-container>
-      
-          <ng-container matColumnDef="createdAt">
-            <th mat-header-cell *matHeaderCellDef class="user-header">Created Date</th>
-            <td mat-cell *matCellDef="let dorm"><span>{{ dorm.createdAt }}</span></td>
-          </ng-container>
-      
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-        </table>
-      </div>
-      
-    </mat-card-content>
-  </mat-card>
-  
-  
-  
+<body>
+  <h1>Posted Dorms</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Address</th>
+        <th>Lessor</th>
+        <th>Publish Status</th>
+        <th>Created At</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="users_tr" *ngFor="let dorm of dorms; let i = index" (click)="openDormDialog(dorm)">
+        <td name="Id">{{ dorm._id }}</td>
+        <td name="First Name">{{ dorm.title }}</td>
+        <td name="Last Name">{{ dorm.address }}</td>
+        <td name="Email">{{ dorm.lessor }}</td>
+        <td name="Username">{{ dorm.publish }}</td>
+        <td name="CreatedAt">{{ dorm.createdAt }}</td>
+      </tr>
+    </tbody>
+  </table>
+</body>

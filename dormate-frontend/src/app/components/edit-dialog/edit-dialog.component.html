@@ -13,7 +13,7 @@
             type="text"
             formControlName="first_name"
             id="first_name"
-            [(ngModel)]="user.first_name"
+            [(ngModel)]="data.first_name"
             >
             <mat-error *ngIf="hasError('first_name', 'required')">First Name is required</mat-error>  
             <mat-error *ngIf="hasError('first_name', 'maxlength')">Not more than 60 characters</mat-error> 
@@ -25,7 +25,7 @@
             type="text"
             formControlName="last_name"
             id="last_name"
-            [(ngModel)]="user.last_name"
+            [(ngModel)]="data.last_name"
             >
             <mat-error *ngIf="hasError('last_name', 'required')">Last Name is required</mat-error>  
             <mat-error *ngIf="hasError('last_name', 'maxlength')">Not more than 60 characters</mat-error> 
@@ -37,7 +37,7 @@
             type="text"
             formControlName="address"
             id="address"
-            [(ngModel)]="user.address"
+            [(ngModel)]="data.address"
             >
             <mat-error *ngIf="hasError('address', 'required')">Address is required</mat-error>  
             <mat-error *ngIf="hasError('address', 'maxlength')">Not more than 100 characters</mat-error> 
@@ -49,7 +49,7 @@
             type="tel"
             formControlName="mobile_number"
             id="mobile_number"
-            [(ngModel)]="user.mobile_number"
+            [(ngModel)]="data.mobile_number"
             >
             <mat-error *ngIf="hasError('mobile_number', 'required')">Mobile Number is required</mat-error>  
             <mat-error *ngIf="hasError('mobile_number', 'maxlength')">Not more than 12 characters</mat-error> 
@@ -62,7 +62,7 @@
             type="text"
             formControlName="username"
             id="username"
-            [(ngModel)]="user.username"
+            [(ngModel)]="data.username"
             >
             <mat-error *ngIf="hasError('username', 'required')">Username is required</mat-error>  
             <mat-error *ngIf="hasError('username', 'maxlength')">Not more than 15 characters</mat-error> 
@@ -81,18 +81,11 @@
             matInput placeholder="Email"
             type="email"
             formControlName="email"
-            [(ngModel)]="user.email"
+            [(ngModel)]="data.email"
             >
             <mat-error *ngIf="hasError('email', 'required')">Email is Required</mat-error> 
             <mat-error *ngIf="hasError('email', 'email')">Not a Valid Email</mat-error> 
           </mat-form-field>
-          <!-- <mat-form-field class="example-full-width">
-            <mat-label>Choose a role...</mat-label>
-            <mat-select>
-              <mat-option [value]="roles" *ngFor="let roles of Roles">{{roles}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field> -->
         </mat-card-content>
         <button mat-stroked-button color="accent" class="btn-block">Update</button>
       </form>

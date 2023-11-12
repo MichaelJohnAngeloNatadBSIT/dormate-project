@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatDialog } from '@angular/material/dialog';
 import { AdminService } from 'projects/admin-app/services/admin.service';
 import { User } from 'src/app/interface/user';
+import { UserDialogComponent } from '../../dialogs/user-dialog/user-dialog.component';
+
 
 
 @Component({
@@ -11,23 +13,36 @@ import { User } from 'src/app/interface/user';
 })
 export class UsersComponent implements OnInit {
   users: User[];
-  dataSource;
 
   constructor(
     private adminService: AdminService,
+    private dialog: MatDialog,
   ){
 
   }
 
   ngOnInit(): void {
-    this.adminService.getAllUser().subscribe(
-      resp => {
-        this.dataSource  = new MatTableDataSource<User>(resp);
-      }, err => {
-        console.log(err);
-      });
+    this.retrieveUsers()
   }
 
-  displayedColumns: string[] = ['_id', 'username', 'email', 'address', 'first_name', 'last_name', 'mobile_number', 'updatedAt'];
+  retrieveUsers(){
+    this.adminService.getAllUser().subscribe({
+      next: (data) => {
+        this.users = data;
+      },
+      error: (e) => console.error(e)
+    });
+  }
+
+  openUserDialog(user: User): void {
+    let dialogRef = this.dialog.open(UserDialogComponent, { 
+      width: '700px', 
+      height: '100vh',
+      data: user
+    }); 
+    dialogRef.afterClosed().subscribe(result => { 
+      this.retrieveUsers()
+     }); 
+  }
 
 }

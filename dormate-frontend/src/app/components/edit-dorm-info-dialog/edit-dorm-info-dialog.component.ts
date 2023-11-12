@@ -12,8 +12,6 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class EditDormInfoDialogComponent {
   
-  selectedFiles?: FileList;
-  currentUser : User;
   dormForm: FormGroup;
 
   dorm: Dorm = {

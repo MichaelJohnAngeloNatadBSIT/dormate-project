@@ -38,4 +38,25 @@ export class AdminService {
     return this.http.get<Dorm[]>(API_URL + 'all_dorm');
   }
 
+  updateUser(id: any, data: any): Observable<any> {
+    return this.http.put(`${API_URL}update_user/${id}`, data);
+  }
+
+  deleteUser(id: any): Observable<any> {
+    return this.http.delete(`${API_URL}delete_user/${id}`);
+  }
+
+  getDormById(id: any): Observable<Dorm> {
+    return this.http.get<Dorm>(`${API_URL}find_one/${id}`);
+  }
+
+  updateDormInfo(id: any, data: any): Observable<any> {
+    return this.http.put(`${API_URL}update_dorm/${id}`, data);
+  }
+
+  deleteDorm(id: any): Observable<any> {
+    return this.http.delete(`${API_URL}delete_dorm/${id}`);
+  }
+
+
 }

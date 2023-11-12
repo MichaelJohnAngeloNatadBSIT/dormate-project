@@ -18,7 +18,10 @@ export class SidebarComponent implements OnInit {
   isUserLoggedIn: boolean;
   status = false;
 
-  constructor(private storageService: StorageService, private authService: AuthService) { 
+  constructor(
+    private storageService: StorageService, 
+    private authService: AuthService
+    ) { 
     this.authService.isUserLoggedIn.subscribe( value => {
       this.isUserLoggedIn = value;
   });
@@ -35,7 +38,6 @@ export class SidebarComponent implements OnInit {
 
       this.username = this.admin.username;
     }
-    console.log(this.isLoggedIn);
   }
 
   logout(): void {

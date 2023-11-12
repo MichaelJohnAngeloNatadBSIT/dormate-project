@@ -39,7 +39,6 @@ export class DormDetailsComponent implements OnInit {
       .subscribe({
         next: (data) => {
           this.currentDorm = data;
-          console.log(data);
         },
         error: (e) => console.error(e)
       });

@@ -190,6 +190,24 @@ exports.retrieveAllUser = (req, res) => {
     });
 };
 
+
+// Find a single Dorm with an id
+exports.findOne = (req, res) => {
+  const id = req.params.id;
+
+  Dorm.findById(id)
+    .then((data) => {
+      if (!data)
+        res.status(404).send({ message: "Not found Dormitory with id " + id });
+      else res.send(data);
+    })
+    .catch((err) => {
+      res
+        .status(500)
+        .send({ message: "Error retrieving Dormitory with id=" + id });
+    });
+};
+
 // Retrieve All Dorm
 exports.retrieveAllDorm = (req, res) => {
   const id = req.params.id;
@@ -252,21 +270,21 @@ exports.updateDorm = (req, res) => {
 exports.deleteUserById = (req, res) => {
   const id = req.params.id;
 
-  Dormitory.findByIdAndRemove(id)
+  User.findByIdAndRemove(id)
     .then((data) => {
       if (!data) {
         res.status(404).send({
-          message: `Cannot delete Dormitory with id=${id}. Maybe Dormitory was not found!`,
+          message: `Cannot delete User with id=${id}. Maybe User was not found!`,
         });
       } else {
         res.send({
-          message: "Dormitory was deleted successfully!",
+          message: "User was deleted successfully!",
         });
       }
     })
     .catch((err) => {
       res.status(500).send({
-        message: "Could not delete Dormitory with id=" + id,
+        message: "Could not delete User with id=" + id,
       });
     });
 };
@@ -276,7 +294,7 @@ exports.deleteUserById = (req, res) => {
 exports.deleteDormById = (req, res) => {
   const id = req.params.id;
 
-  Dormitory.findByIdAndRemove(id)
+  Dorm.findByIdAndRemove(id)
     .then((data) => {
       if (!data) {
         res.status(404).send({
