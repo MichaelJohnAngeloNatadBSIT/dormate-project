@@ -52,7 +52,6 @@ export class ProfileComponent implements OnInit {
       },
       error: (e) => console.error(e)
     });
-
   }
 
   retrieveForApprovalDorm(): void {
@@ -73,7 +72,7 @@ export class ProfileComponent implements OnInit {
       data: this.user
     }); 
     dialogRef.afterClosed().subscribe(result => { 
-      window.location.reload();
+      this.retrieveUser();
      }); 
   }
 
@@ -82,6 +81,9 @@ export class ProfileComponent implements OnInit {
       width: '900px', 
       height: '80vh',
     }); 
+    dialogRef.afterClosed().subscribe(result => { 
+      this.retrieveUser();
+     }); 
   }
 
   openCertUploadDialog(dorm: Dorm): void {
@@ -92,7 +94,7 @@ export class ProfileComponent implements OnInit {
     }); 
 
     dialogRef.afterClosed().subscribe(result => { 
-     window.location.reload();
+      this.retrieveForApprovalDorm();
     }); 
 
   }
@@ -104,7 +106,7 @@ export class ProfileComponent implements OnInit {
       data: dorm
     }); 
     dialogRef.afterClosed().subscribe(result => { 
-      window.location.reload();
+      this.retrieveForApprovalDorm();
      }); 
 
   }
@@ -114,12 +116,18 @@ export class ProfileComponent implements OnInit {
       height: '80vh',
       data: dorm
     }); 
+    dialogRef.afterClosed().subscribe(result => { 
+      this.retrieveForApprovalDorm();
+     }); 
   }
   
   openDeleteDormDialog(dorm: Dorm): void {
     let dialogRef = this.dialog.open(DeleteDormDialogComponent, { 
       data: dorm
     }); 
+    dialogRef.afterClosed().subscribe(result => { 
+      this.retrieveForApprovalDorm();
+     }); 
   }
 
   config: SwiperOptions = {

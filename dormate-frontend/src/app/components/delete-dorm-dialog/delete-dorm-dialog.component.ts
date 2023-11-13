@@ -21,8 +21,6 @@ export class DeleteDormDialogComponent {
     console.log(this.data);
     this.dormService.delete(this.data._id).subscribe({
       next: (res) => {
-        window.location.reload();
-
       },
       error: (e) => console.error(e)
     });

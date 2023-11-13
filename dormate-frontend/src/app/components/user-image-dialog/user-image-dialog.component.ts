@@ -76,7 +76,6 @@ export class UserImageDialogComponent implements OnInit {
               this.fileInfos = this.userService.getFiles();
               this.router.navigate(['/profile'])
                 .then(()=> {
-                window.location.reload();
               });
             }
           },

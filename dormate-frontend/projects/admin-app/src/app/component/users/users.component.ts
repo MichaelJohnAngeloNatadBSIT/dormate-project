@@ -37,7 +37,7 @@ export class UsersComponent implements OnInit {
   openUserDialog(user: User): void {
     let dialogRef = this.dialog.open(UserDialogComponent, { 
       width: '700px', 
-      height: '100vh',
+      height: '80vh',
       data: user
     }); 
     dialogRef.afterClosed().subscribe(result => { 
