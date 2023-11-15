@@ -1,7 +1,8 @@
 import { Component, OnInit  } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { ConfirmPasswordValidator } from 'src/app/angular-material/validator/confirm-password.validator';
 
 @Component({
   selector: 'app-register',
@@ -29,21 +30,22 @@ export class RegisterComponent implements OnInit {
   constructor(
     private authService: AuthService, 
     private router: Router,
+    private fb: FormBuilder
     ) { }
 
   ngOnInit(): void {
-    this.form = new FormGroup({
+    this.form = this.fb.group({
       email: new FormControl('', [Validators.required, Validators.email]),
       username: new FormControl('', [Validators.required, Validators.maxLength(15)]),
-      password: new FormControl('', [Validators.required, Validators.minLength(8)]),
+      password: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(30)]),
+      confirm_password: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(30)]),
       first_name: new FormControl('', [Validators.required, Validators.maxLength(60)]),
       last_name: new FormControl('', [Validators.required, Validators.maxLength(60)]),
       address: new FormControl('', [Validators.required, Validators.maxLength(100)]),
       mobile_number: new FormControl('', [Validators.required, Validators.maxLength(12)]),
-
-      //confirmPassword: new FormControl('', Validators.required),
-      
-    })
+    },
+    {validators: ConfirmPasswordValidator("password", "confirm_password")}
+    )
   }
 
   onSubmit() {

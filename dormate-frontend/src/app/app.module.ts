@@ -34,6 +34,7 @@ import { DeleteDormDialogComponent } from './components/delete-dorm-dialog/delet
 import { EventDialogComponent } from './event/event-dialog/event-dialog.component';
 import { EventInterceptor} from './event/event-interceptor.interceptor';
 import { MatTableModule } from '@angular/material/table';
+import { ChangePasswordComponent } from './dialogs/change-password/change-password.component';
 
 
 
@@ -59,6 +60,7 @@ import { MatTableModule } from '@angular/material/table';
     EditDormInfoDialogComponent,
     DeleteDormDialogComponent,
     EventDialogComponent,
+    ChangePasswordComponent,
   ],
   imports: [
     BrowserModule,

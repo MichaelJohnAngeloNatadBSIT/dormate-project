@@ -1,9 +1,12 @@
 <body>
   <div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
     <mat-card class="box">
-      <mat-card-header>
-        <mat-card-title>Register</mat-card-title>
-      </mat-card-header>
+      <div class="app-header">
+        <mat-card-header>
+          <mat-card-title>Register</mat-card-title>
+        </mat-card-header>
+      </div>
+
       <form class="example-form" [formGroup]="form" (ngSubmit)="onSubmit()">
         <mat-card-content>
           <mat-form-field class="example-full-width">
@@ -80,17 +83,26 @@
               {{showPassword?'visibility_off':'visibility'}}
             </mat-icon>
             <mat-error *ngIf="hasError('password', 'required')">Password is Required</mat-error> 
-            <mat-error *ngIf="hasError('password', 'minlength')">Password is must be at least 8 characters</mat-error>
+            <mat-error *ngIf="hasError('password', 'minlength')">Password must be at least 8 characters</mat-error>
+            <mat-error *ngIf="hasError('password', 'maxlength')">Password must not exceed 30 characters</mat-error>
           </mat-form-field>
-          <!-- <mat-form-field class="example-full-width">
-            <mat-label>Choose a role...</mat-label>
-            <mat-select>
-              <mat-option [value]="roles" *ngFor="let roles of Roles">{{roles}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field> -->
+          <mat-form-field class="example-full-width">
+            <input 
+            matInput placeholder="Confirm Password"
+            [type]="showPassword ? 'text' : 'password'" name="password"
+            formControlName = "confirm_password"
+            >
+            <mat-icon matSuffix (click)="togglePasswordVisibility()">
+              {{showPassword?'visibility_off':'visibility'}}
+            </mat-icon>
+            <mat-error *ngIf="hasError('confirm_password', 'confirmPasswordValidator')">New Password and Confirm Password do not match</mat-error>
+            <mat-error *ngIf="hasError('confirm_password', 'required')">Confirm Password is Required</mat-error> 
+            <mat-error *ngIf="hasError('confirm_password', 'minlength')">Confirm Password must be at least 8 characters</mat-error>
+            <mat-error *ngIf="hasError('confirm_password', 'maxlength')">Confirm Password must not exceed 30 characters</mat-error>
+          </mat-form-field>
+
         </mat-card-content>
-        <button mat-stroked-button color="accent" class="btn-block">Register</button>
+        <button mat-raised-button color="primary" class="btn-block" [disabled]="!form.valid">Register</button>
       </form>
     </mat-card>
   </div>

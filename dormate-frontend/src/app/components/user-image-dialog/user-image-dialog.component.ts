@@ -35,6 +35,7 @@ export class UserImageDialogComponent implements OnInit {
   ngOnInit(): void {
     this.fileInfos = this.userService.getFiles();
     this.currentUser = this.tokenService.getUser();
+    console.log(this.currentUser);
   }
 
 

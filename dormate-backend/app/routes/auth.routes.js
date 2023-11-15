@@ -22,7 +22,6 @@ module.exports = function(app) {
   app.post("/api/auth/signin", controller.signin);
 
   app.post("/api/auth/signout", controller.signout);
-  
-  // app.post("/api/auth/update_user_image/:id", controller.update_user_image);
+
 
 };

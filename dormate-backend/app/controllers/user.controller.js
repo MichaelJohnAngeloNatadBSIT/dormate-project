@@ -3,6 +3,7 @@ const dbConfig = require("../config/db.config");
 
 const MongoClient = require("mongodb").MongoClient;
 const GridFSBucket = require("mongodb").GridFSBucket;
+var bcrypt = require("bcryptjs");
 
 const url = dbConfig.url;
 
@@ -14,6 +15,7 @@ const mongoClient = new MongoClient(url);
 
 const db = require("../models");
 const User = db.user;
+const UserImage = db.user_image;
 
 exports.allAccess = (req, res) => {
   res.status(200).send("Public Content.");
@@ -46,7 +48,6 @@ exports.updateUserImage = async (req, res) => {
     var userImage = baseUrl + req.file.filename;
     var imageId = req.file.id;
     image_id_string = imageId.toString();
-    console.log(userImage);
 
     //updates user_image field
     User.findByIdAndUpdate(
@@ -60,7 +61,6 @@ exports.updateUserImage = async (req, res) => {
             message: `Cannot update User with id=${id}. Maybe User was not found!`,
           });
         }
-        console.log("User was updated successfully.");
         res.send({ message: "User was updated successfully." });
       })
       .catch((err) => {
@@ -151,12 +151,6 @@ exports.download = async (req, res) => {
   }
 };
 
-// module.exports = {
-//   updateUserImage,
-//   getListFiles,
-//   download,
-// };
-
 // Retrieve all User from the database.
 exports.findAll = (req, res) => {
   const first_name = req.query.first_name;
@@ -208,6 +202,61 @@ exports.updateUser = (req, res) => {
         message: "Error updating User with id=" + id,
       });
     });
+};
+
+//change password of user
+exports.changePassword = (req, res) => {
+  const id = req.params.id;
+  const newPassword = bcrypt.hashSync(req.body.new_password, 8);
+  User.findOne({_id: id}).populate('password').exec((err, user) =>{
+    if (err) {
+      res.status(500).send({ message: err });
+      return;
+    }
+    if (!user) {
+      return res.status(404).send({ message: "Username or Password does not match" });
+    }
+
+    var passwordIsValid = bcrypt.compareSync(
+      req.body.password,
+      user.password
+    );
+    if (!passwordIsValid) {
+      return res.status(401).send({ message: "Current Password does not match!" });
+    }
+
+    
+  User.findByIdAndUpdate(id, {password: newPassword}, { useFindAndModify: false })
+    .then((data) => {
+      if (!data) {
+        res.status(404).send({
+          message: `Cannot update User Password with id=${id}. Maybe User was not found!`,
+        });
+      } else res.send({ message: "User Password was updated successfully." });
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: "Error updating User Password with id =" + id,
+      });
+    });
+  });
+
+
+
+
+  // User.findByIdAndUpdate(id, {password: newPassword}, { useFindAndModify: false })
+  //   .then((data) => {
+  //     if (!data) {
+  //       res.status(404).send({
+  //         message: `Cannot update User Password with id=${id}. Maybe User was not found!`,
+  //       });
+  //     } else res.send({ message: "User Password was updated successfully." });
+  //   })
+  //   .catch((err) => {
+  //     res.status(500).send({
+  //       message: "Error updating User Password with id =" + id,
+  //     });
+  //   });
 };
 
 // Delete a User with the specified id in the request

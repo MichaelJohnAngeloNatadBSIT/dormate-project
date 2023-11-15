@@ -40,6 +40,10 @@ export class UserService {
     return this.http.put(`${USER_URL}update_user_details/${id}`, data);
   }
 
+  changePassword(id: any, data: any): Observable<any> {
+    return this.http.put(`${USER_URL}change_password/${id}`, data);
+  }
+
   uploadUserImage(id: any, file: File): Observable<HttpEvent<any>> {
     const formData: FormData = new FormData();
 

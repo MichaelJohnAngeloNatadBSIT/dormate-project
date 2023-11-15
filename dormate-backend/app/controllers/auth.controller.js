@@ -115,6 +115,7 @@ exports.signin = (req, res) => {
         last_name: user.last_name,
         address: user.address,
         mobile_number: user.mobile_number,
+        image_id: user.image_id,
         roles: authorities,
         accessToken: token,
         message: "Logged in Successfully"
@@ -132,6 +133,7 @@ exports.signout = async (req, res) => {
     this.next(err);
   }
 };
+
 
 
 

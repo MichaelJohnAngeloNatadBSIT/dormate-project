@@ -28,12 +28,11 @@ module.exports = function(app) {
 
   app.put("/user/update_user_image/:id", controller.updateUserImage);
   app.put("/user/update_user_details/:id", controller.updateUser);
+  app.put("/user/change_password/:id", controller.changePassword);
   app.get("/user/files", controller.getListFiles);
   app.get("/user/files/:name", controller.download);
   app.get("/user/:id", controller.retrieveUser);
   app.get("/user_image/:name", controller.download);
 
   // return app.use("/", router);
-
-// app.put("/api/update_user/:id", controller.updateUser);
 };

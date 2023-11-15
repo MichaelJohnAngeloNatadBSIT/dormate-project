@@ -13,6 +13,7 @@ import { CertificateUploadDialogComponent } from '../certificate-upload-dialog/c
 import { DormImagesUploadDialogComponent } from '../dorm-images-upload-dialog/dorm-images-upload-dialog.component';
 import { EditDormInfoDialogComponent } from '../edit-dorm-info-dialog/edit-dorm-info-dialog.component';
 import { DeleteDormDialogComponent } from '../delete-dorm-dialog/delete-dorm-dialog.component';
+import { ChangePasswordComponent } from 'src/app/dialogs/change-password/change-password.component';
 
 @Component({
   selector: 'app-profile',
@@ -75,6 +76,16 @@ export class ProfileComponent implements OnInit {
       this.retrieveUser();
      }); 
   }
+  openChangePassDialog(): void{
+    let dialogRef = this.dialog.open(ChangePasswordComponent, { 
+      width: '500px', 
+      height: '80vh',
+      data: this.user
+    }); 
+    dialogRef.afterClosed().subscribe(result => { 
+      this.retrieveUser();
+     }); 
+  }
 
   openUserImageDialog(): void {
     let dialogRef = this.dialog.open(UserImageDialogComponent, { 
@@ -130,6 +141,8 @@ export class ProfileComponent implements OnInit {
      }); 
   }
 
+ 
+
   config: SwiperOptions = {
     pagination: { 
       el: '.swiper-pagination', 
@@ -142,10 +155,10 @@ export class ProfileComponent implements OnInit {
     spaceBetween: 30
   }; 
 
-  setActiveDorm(dorm: Dorm, index: number): void {
-    this.currentDorm = dorm;
-    this.currentIndex = index;
-  }
+  // setActiveDorm(dorm: Dorm, index: number): void {
+  //   this.currentDorm = dorm;
+  //   this.currentIndex = index;
+  // }
 
 
 }

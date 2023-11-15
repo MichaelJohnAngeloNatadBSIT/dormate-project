@@ -43,7 +43,6 @@ export class EditDialogComponent implements OnInit {
     this.userService.updateUser(this.data._id, formData)
       .subscribe({
         next: (res) => {
-          console.log(res);
           message = res.message ? res.message : 'This user was updated successfully!';
         },
         error: (e) => console.error(e)

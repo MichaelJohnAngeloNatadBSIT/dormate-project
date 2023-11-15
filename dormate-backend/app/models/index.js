@@ -10,6 +10,7 @@ db.mongoose = mongoose;
 db.url = dbConfig.url;
 db.dormitory = require("../models/dorm.model.js")(mongoose);
 db.user = require("../models/user.model.js");
+db.user_image = require("../models/user_image.model.js");
 db.admin = require("../models/admin.model.js");
 db.role = require("../models/role.model.js");
 db.ROLES = ["user", "admin", "landlord"];
