@@ -39,6 +39,7 @@ import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { EventInterceptor } from './interceptors/event.interceptor';
 import { SpinnerComponent } from './component/spinner/spinner.component';
 import { LoadingInterceptor } from './interceptors/loading.interceptor';
+import { MatTableModule } from '@angular/material/table';
 
 
 
@@ -81,7 +82,8 @@ import { LoadingInterceptor } from './interceptors/loading.interceptor';
     MatIconModule,
     BrowserAnimationsModule,
     FontAwesomeModule,
-    NgxUsefulSwiperModule
+    NgxUsefulSwiperModule,
+
   ],
   providers: [
     AuthInterceptor,

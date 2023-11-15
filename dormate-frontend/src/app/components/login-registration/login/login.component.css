@@ -6,12 +6,13 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
   min-height: 100vh;
-  background-color: #abc4fc;
-  background: url('../../../assets/interior-bg-register.jpg') no-repeat center center fixed; 
+  background-color: #e2e2e2;
+  background: url('/assets/interior-bg-login.jpg') no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+
 }
 .app-header {
   justify-content: space-between;
@@ -20,34 +21,32 @@ body {
   left: 0;
   right: 0;
   z-index: 2;
-  /* box-shadow: 0 3px 5px -1px rgba(0, 0, 0, .2), 0 6px 10px 0 rgba(0, 0, 0, .14), 0 1px 18px 0 rgba(0, 0, 0, .12); */
+  box-shadow: 0 3px 5px -1px rgba(0, 0, 0, .2), 0 6px 10px 0 rgba(0, 0, 0, .14), 0 1px 18px 0 rgba(0, 0, 0, .12);
 }
 .login-wrapper {
   height: 100%;
-  max-height: 800px;
 }
+
 .box {
   position: relative;
   top: 0;
   opacity: 1;
   float: left;
   padding: 60px 50px 40px 50px;
-  /* margin: 100px 100px 100px 100px; */
   width: 100%;
-  height: 100%;
   background: #fff;
   border-radius: 10px;
   transform: scale(1);
   -webkit-transform: scale(1);
   -ms-transform: scale(1);
   z-index: 5;
-  max-width: 500px;
+  max-width: 400px;
 }
 .box.back {
   transform: scale(.95);
   -webkit-transform: scale(.95);
   -ms-transform: scale(.95);
-  top: -10px;
+  top: -20px;
   opacity: .8;
   z-index: -1;
 }
@@ -57,7 +56,7 @@ body {
   height: 30px;
   border-radius: 10px;
   position: absolute;
-  top: -5px;
+  top: -10px;
   background: rgba(255, 255, 255, .6);
   left: 0;
   transform: scale(.95);
@@ -74,9 +73,6 @@ body {
 .login-wrapper .btn-block {
   width: 100%;
 }
-.example-full-width{
-  height: 65px;
-}
 .login-wrapper mat-card-header {
   text-align: center;
   width: 100%;
@@ -86,7 +82,6 @@ body {
 .login-wrapper mat-card-header mat-card-title {
   font-size: 30px;
   margin: 0;
-  padding-top: 0;
 }
 .login-wrapper .mat-card {
   padding: 40px 70px 50px;
@@ -99,19 +94,4 @@ body {
 .login-wrapper .mat-form-field-appearance-legacy .mat-form-field-infix {
   padding: 0.8375em 0;
 }
-
-/* mat-form-field{
-  mat-error{
-    display: none !important;
-  }
-
-  mat-error:first-child{
-    display: block !important;
-  } */
-
-  /* mat-form-field mat-error {
-    display: none !important;
- }
-  mat-form-field mat-error:first-child {
-    display: block !important;
- } */
+    

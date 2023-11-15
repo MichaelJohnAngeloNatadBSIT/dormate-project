@@ -194,8 +194,6 @@ exports.findOne = (req, res) => {
 
 // Retrieve All Dorm
 exports.retrieveAllDorm = (req, res) => {
-  const id = req.params.id;
-
   Dorm.find()
     .then((data) => {
       if (!data)
@@ -206,6 +204,31 @@ exports.retrieveAllDorm = (req, res) => {
       res.status(500).send({ message: "Error retrieving Dorms" });
     });
 };
+
+exports.countDorm = (req, res) => {
+  Dorm.countDocuments().then((data) => {
+  if (!data)
+      res.status(404).send({ message: "There are currently no dorm."});
+  else res.status(200).send({data});
+  })
+  .catch((err) => {
+    res.status(500).send({ message: "Error retrieving count of Dorms" });
+  });;
+}
+
+exports.countDormApproved = (req, res) => {
+  var condition = { 
+    publish: true
+  };
+  Dorm.find(condition).countDocuments().then((data) => {
+  if (!data)
+      res.status(404).send({ message: "There are currently no dorm."});
+  else res.status(200).send({data});
+  })
+  .catch((err) => {
+    res.status(500).send({ message: "Error retrieving count of Dorms" });
+  });;
+}
 
 exports.updateDorm = (req, res) => {
   if (!req.body) {
@@ -269,6 +292,17 @@ exports.retrieveAllUser = (req, res) => {
       res.status(500).send({ message: "Error retrieving User" });
     });
 };
+
+exports.countUser = (req, res) => {
+  User.countDocuments().then((data) => {
+  if (!data)
+      res.status(404).send({ message: "There are currently no user."});
+  else res.status(200).send({data});
+  })
+  .catch((err) => {
+    res.status(500).send({ message: "Error retrieving count of Users" });
+  });;
+}
 
 
 // Edit details of a User by the id in the request

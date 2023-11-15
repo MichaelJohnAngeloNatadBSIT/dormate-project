@@ -4,15 +4,15 @@ import { FormGroup } from "@angular/forms";
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 import { User } from 'src/app/interface/user';
 import { UserService } from 'src/app/services/user.service';
-import { EditDialogComponent } from '../edit-dialog/edit-dialog.component';
-import { UserImageDialogComponent } from '../user-image-dialog/user-image-dialog.component';
+import { EditDialogComponent } from '../../dialogs/edit-dialog/edit-dialog.component';
+import { UserImageDialogComponent } from '../../dialogs/user-image-dialog/user-image-dialog.component';
 import { DormService } from 'src/app/services/dorm.service';
 import { Dorm } from 'src/app/models/dorms.model';
 import { SwiperOptions } from 'swiper';
-import { CertificateUploadDialogComponent } from '../certificate-upload-dialog/certificate-upload-dialog.component';
-import { DormImagesUploadDialogComponent } from '../dorm-images-upload-dialog/dorm-images-upload-dialog.component';
-import { EditDormInfoDialogComponent } from '../edit-dorm-info-dialog/edit-dorm-info-dialog.component';
-import { DeleteDormDialogComponent } from '../delete-dorm-dialog/delete-dorm-dialog.component';
+import { CertificateUploadDialogComponent } from '../../dialogs/certificate-upload-dialog/certificate-upload-dialog.component';
+import { DormImagesUploadDialogComponent } from '../../dialogs/dorm-images-upload-dialog/dorm-images-upload-dialog.component';
+import { EditDormInfoDialogComponent } from '../../dialogs/edit-dorm-info-dialog/edit-dorm-info-dialog.component';
+import { DeleteDormDialogComponent } from '../../dialogs/delete-dorm-dialog/delete-dorm-dialog.component';
 import { ChangePasswordComponent } from 'src/app/dialogs/change-password/change-password.component';
 
 @Component({

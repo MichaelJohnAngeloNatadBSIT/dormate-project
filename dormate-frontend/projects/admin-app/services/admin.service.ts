@@ -34,8 +34,20 @@ export class AdminService {
     return this.http.get<User[]>(API_URL + 'all_user');
   }
 
+  getCountUser(): Observable<Dorm[]>{
+    return this.http.get<Dorm[]>(API_URL + 'count_user');
+  }
+
   getAllDorm(): Observable<Dorm[]>{
     return this.http.get<Dorm[]>(API_URL + 'all_dorm');
+  }
+
+  getCountDorm(): Observable<Dorm[]>{
+    return this.http.get<Dorm[]>(API_URL + 'count_dorm');
+  }
+
+  getCountDormApproved(): Observable<Dorm[]>{
+    return this.http.get<Dorm[]>(API_URL + 'count_dorm_approved');
   }
 
   updateUser(id: any, data: any): Observable<any> {
