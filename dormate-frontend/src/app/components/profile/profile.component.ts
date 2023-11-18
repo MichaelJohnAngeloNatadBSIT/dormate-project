@@ -23,6 +23,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import timeGrigPlugin from '@fullcalendar/timegrid';
 import { EventInput } from '@fullcalendar/core';
+import { ImageZoomComponent } from 'src/app/dialogs/image-zoom/image-zoom.component';
 
 
 @Component({
@@ -212,6 +213,14 @@ export class ProfileComponent implements OnInit {
       this.retrieveForApprovalSchedule();
       this.retrieveForApprovalScheduleApproved();
      }); 
+  }
+
+  openImageZoomDialog(images: any){
+    let dialogRef = this.dialog.open(ImageZoomComponent, { 
+      width: '900px', 
+      height: '70vh',
+      data: images
+    }); 
   }
 
   config: SwiperOptions = {

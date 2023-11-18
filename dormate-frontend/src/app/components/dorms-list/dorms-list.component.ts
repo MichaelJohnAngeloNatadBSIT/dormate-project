@@ -6,6 +6,7 @@ import { User } from 'src/app/interface/user';
 import { SwiperOptions } from 'swiper';
 import { InfoScheduleDialogComponent } from 'src/app/dialogs/info-schedule-dialog/info-schedule-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { ImageZoomComponent } from 'src/app/dialogs/image-zoom/image-zoom.component';
 
 @Component({
   selector: 'app-dorms-list',
@@ -86,6 +87,14 @@ export class DormsListComponent implements OnInit{
         width: '800px', 
         height: '70vh',
         data: {user: this.currentUser, dorm: dorm}
+      }); 
+    }
+
+    openImageZoomDialog(images: any){
+      let dialogRef = this.dialog.open(ImageZoomComponent, { 
+        width: '900px', 
+        height: '70vh',
+        data: images
       }); 
     }
 

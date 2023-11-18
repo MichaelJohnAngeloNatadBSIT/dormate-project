@@ -40,6 +40,7 @@ import { ChangePasswordComponent } from './dialogs/change-password/change-passwo
 import { InfoScheduleDialogComponent } from './dialogs/info-schedule-dialog/info-schedule-dialog.component';
 import { ChatService } from './services/chat.service';
 import { ScheduleApproveComponent } from './dialogs/schedule-approve/schedule-approve.component';
+import { ImageZoomComponent } from './dialogs/image-zoom/image-zoom.component';
 
 
 @NgModule({
@@ -66,6 +67,7 @@ import { ScheduleApproveComponent } from './dialogs/schedule-approve/schedule-ap
     ChangePasswordComponent,
     InfoScheduleDialogComponent,
     ScheduleApproveComponent,
+    ImageZoomComponent,
   ],
   imports: [
     BrowserModule,

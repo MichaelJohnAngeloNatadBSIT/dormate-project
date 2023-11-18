@@ -23,55 +23,57 @@
 </div>
 
 <div class="container">
-  
-<div class="w3-content" style="max-width: 1532px">
-  <!-- tagline -->
-  <div class="w3-container w3-margin-top" id="rooms">
-    <h3>Dorms</h3>
-    <p>Your Accommodation is our Mission</p>
-  </div>
+  <div class="w3-content" style="max-width: 1532px">
+    <!-- tagline -->
+    <div class="w3-container w3-margin-top" id="rooms">
+      <h3>Dorms</h3>
+      <p>Your Accommodation is our Mission</p>
+    </div>
 
-  <!-- dorms post -->
-  <div class="w3-row-padding w3-padding-16">
-    <div
-      class="w3-third w3-margin-bottom"
-      *ngFor="let dorm of dorms; let i = index"
-      [class.active]="i == currentIndex"
-      (click)="setActiveDorm(dorm, i)"
-    >
-      <!-- image slider -->
-      <swiper [config]="config">
-        <div class="swiper-wrapper">
-          <div class="swiper-slide" *ngFor="let image of dorm.dorm_images">
-            <img src="{{ image }}" alt="img 1" class="dorm_image" />
+    <!-- dorms post -->
+    <div class="w3-row-padding w3-padding-16">
+      <div
+        class="w3-third w3-margin-bottom"
+        *ngFor="let dorm of dorms; let i = index"
+        [class.active]="i == currentIndex"
+        (click)="setActiveDorm(dorm, i)"
+      >
+        <!-- image slider -->
+        <swiper [config]="config">
+          <div class="swiper-wrapper" (click)="openImageZoomDialog(dorm.dorm_images)">
+            <div class="swiper-slide" *ngFor="let image of dorm.dorm_images">
+              <img src="{{ image }}" alt="img 1" class="dorm_image" />
+            </div>
           </div>
+
+          <!-- Add Pagination -->
+          <div class="swiper-pagination"></div>
+
+          <!-- Add Arrows -->
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
+        </swiper>
+
+        <div class="w3-container w3-white">
+          <h3>{{ dorm.title }}</h3>
+          <h6 class="w3-opacity">{{ dorm.rent }}</h6>
+          <p>{{ dorm.description }}</p>
+          <p></p>
+          <p>{{ dorm.address }}</p>
+          <p>15m<sup>2</sup></p>
+          <p class="w3-large">
+            <i class="fa fa-bath"></i> <i class="fa fa-phone"></i>
+            <i class="fa fa-wifi"></i>
+          </p>
+          <button
+            class="w3-button w3-block w3-indigo w3-margin-bottom"
+            (click)="openInfoSchedDialog(dorm)"
+          >
+            Schedule A Visit
+          </button>
         </div>
-
-        <!-- Add Pagination -->
-        <div class="swiper-pagination"></div>
-
-        <!-- Add Arrows -->
-        <div class="swiper-button-next"></div>
-        <div class="swiper-button-prev"></div>
-      </swiper>
-
-      <div class="w3-container w3-white">
-        <h3>{{ dorm.title }}</h3>
-        <h6 class="w3-opacity">{{ dorm.rent }}</h6>
-        <p>{{ dorm.description }}</p>
-        <p></p>
-        <p>{{ dorm.address }}</p>
-        <p>15m<sup>2</sup></p>
-        <p class="w3-large">
-          <i class="fa fa-bath"></i> <i class="fa fa-phone"></i>
-          <i class="fa fa-wifi"></i>
-        </p>
-        <button class="w3-button w3-block w3-indigo w3-margin-bottom" (click)="openInfoSchedDialog(dorm)">
-          Schedule A Visit
-        </button>
       </div>
     </div>
   </div>
 </div>
 
-</div>
