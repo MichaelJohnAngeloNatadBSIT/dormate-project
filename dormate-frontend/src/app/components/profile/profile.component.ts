@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog'; 
-import { FormGroup } from "@angular/forms";
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 import { User } from 'src/app/interface/user';
 import { UserService } from 'src/app/services/user.service';
 import { EditDialogComponent } from '../../dialogs/edit-dialog/edit-dialog.component';
 import { UserImageDialogComponent } from '../../dialogs/user-image-dialog/user-image-dialog.component';
 import { DormService } from 'src/app/services/dorm.service';
+import { ChatService } from 'src/app/services/chat.service';
 import { Dorm } from 'src/app/models/dorms.model';
 import { SwiperOptions } from 'swiper';
 import { CertificateUploadDialogComponent } from '../../dialogs/certificate-upload-dialog/certificate-upload-dialog.component';
@@ -14,6 +14,16 @@ import { DormImagesUploadDialogComponent } from '../../dialogs/dorm-images-uploa
 import { EditDormInfoDialogComponent } from '../../dialogs/edit-dorm-info-dialog/edit-dorm-info-dialog.component';
 import { DeleteDormDialogComponent } from '../../dialogs/delete-dorm-dialog/delete-dorm-dialog.component';
 import { ChangePasswordComponent } from 'src/app/dialogs/change-password/change-password.component';
+import { ScheduleService } from 'src/app/services/schedule.service';
+import { Schedule } from 'src/app/models/schedules.model';
+import { ScheduleApproveComponent } from 'src/app/dialogs/schedule-approve/schedule-approve.component';
+
+import { CalendarOptions } from '@fullcalendar/core';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import interactionPlugin from '@fullcalendar/interaction';
+import timeGrigPlugin from '@fullcalendar/timegrid';
+import { EventInput } from '@fullcalendar/core';
+
 
 @Component({
   selector: 'app-profile',
@@ -23,18 +33,19 @@ import { ChangePasswordComponent } from 'src/app/dialogs/change-password/change-
 export class ProfileComponent implements OnInit {
 
   currentUser: User;
-  form: FormGroup;
-  percentDone: any = 0;
   user : User;
   dorms?: Dorm[];
-  currentDorm: Dorm = {};
-  currentIndex = -1;
+  schedules?: Schedule[];
+  schedulesApproved?: Schedule[];
+  calendar_events : EventInput[] = [];
 
   constructor(
     private tokenService: TokenStorageService,
     private userService: UserService,
     private dialog: MatDialog,
     private dormService: DormService,
+    private chatService: ChatService,
+    private scheduleService: ScheduleService
     ) {
 
     }
@@ -43,8 +54,34 @@ export class ProfileComponent implements OnInit {
     this.currentUser = this.tokenService.getUser();
     this.retrieveUser();
     this.retrieveForApprovalDorm();
+    this.chatService.setupSocketConnection();
+    this.retrieveForApprovalSchedule();
+    this.retrieveForApprovalScheduleApproved()
+  }
+  ngOnDestroy() {
+    this.chatService.disconnect();
   }
 
+  calendarOptions: CalendarOptions = {
+    plugins: [dayGridPlugin, timeGrigPlugin, interactionPlugin],
+    initialView: 'dayGridMonth',
+    headerToolbar: {
+      left: 'prev',
+      center: 'title,today',
+      right: 'next',
+    },
+    weekends: true,
+    editable: true,
+    selectable: true,
+    selectMirror: true,
+    dayMaxEvents: true,
+    displayEventTime: false,
+
+  };
+
+  onDateClick(res: any) {
+    alert('Clicked on date : ' + res.dateStr);
+  }
 
   retrieveUser(){
     this.userService.retrieveUserWithId(this.currentUser.id).subscribe({
@@ -63,7 +100,31 @@ export class ProfileComponent implements OnInit {
         },
         error: (e) => console.error(e)
       });
- 
+  }
+
+  retrieveForApprovalSchedule(): void {
+    this.scheduleService.getAllScheduleLandlord(this.currentUser.id)
+      .subscribe({
+        next: (data) => {
+          this.schedules = data;
+        },
+        error: (e) => console.error(e)
+      });
+  }
+
+  retrieveForApprovalScheduleApproved(): void {
+    this.scheduleService.getAllScheduleLandlordApproved(this.currentUser.id)
+      .subscribe({
+        next: (data) => {
+          this.schedulesApproved = data;
+          this.schedulesApproved.forEach(d =>{
+            this.calendar_events = this.calendar_events.concat(
+              { start: new Date(d.schedule_date), title: d.user_full_name+" will visit "+d.dorm_title, test: 'test' }
+            );
+          })
+        },
+        error: (e) => console.error(e)
+      });
   }
 
   openEditDialog(): void {
@@ -141,7 +202,17 @@ export class ProfileComponent implements OnInit {
      }); 
   }
 
- 
+  openScheduleApproveDialog(schedule: Schedule): void{
+    let dialogRef = this.dialog.open(ScheduleApproveComponent, { 
+      width: '500px', 
+      height: '80vh',
+      data: schedule
+    }); 
+    dialogRef.afterClosed().subscribe(result => { 
+      this.retrieveForApprovalSchedule();
+      this.retrieveForApprovalScheduleApproved();
+     }); 
+  }
 
   config: SwiperOptions = {
     pagination: { 
@@ -154,11 +225,6 @@ export class ProfileComponent implements OnInit {
     },
     spaceBetween: 30
   }; 
-
-  // setActiveDorm(dorm: Dorm, index: number): void {
-  //   this.currentDorm = dorm;
-  //   this.currentIndex = index;
-  // }
-
+//ADD BUTTON OR LIST FOR VIEW DIALOG OF APPROVED SCHEDULE WITH DIALOG INFO OF USERS
 
 }

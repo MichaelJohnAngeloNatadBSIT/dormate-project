@@ -4,6 +4,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AngularMaterialModule } from './angular-material/angular-material.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { GoogleMapsModule } from '@angular/google-maps';
+import { ToastrModule } from 'ngx-toastr';
+import { FullCalendarModule } from '@fullcalendar/angular';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,7 +20,6 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { BoardAdminComponent } from './components/board-admin/board-admin.component';
 import { BoardLandlordComponent } from './components/board-landlord/board-landlord.component';
 import { BoardUserComponent } from './components/board-user/board-user.component';
-
 import { authInterceptorProviders } from './helpers/auth.interceptor';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ErrorComponent } from './error/error-component/error-component.component';
@@ -35,8 +37,9 @@ import { EventDialogComponent } from './event/event-dialog/event-dialog.componen
 import { EventInterceptor} from './event/event-interceptor.interceptor';
 import { MatTableModule } from '@angular/material/table';
 import { ChangePasswordComponent } from './dialogs/change-password/change-password.component';
-
-
+import { InfoScheduleDialogComponent } from './dialogs/info-schedule-dialog/info-schedule-dialog.component';
+import { ChatService } from './services/chat.service';
+import { ScheduleApproveComponent } from './dialogs/schedule-approve/schedule-approve.component';
 
 
 @NgModule({
@@ -61,6 +64,8 @@ import { ChangePasswordComponent } from './dialogs/change-password/change-passwo
     DeleteDormDialogComponent,
     EventDialogComponent,
     ChangePasswordComponent,
+    InfoScheduleDialogComponent,
+    ScheduleApproveComponent,
   ],
   imports: [
     BrowserModule,
@@ -73,13 +78,22 @@ import { ChangePasswordComponent } from './dialogs/change-password/change-passwo
     ReactiveFormsModule,
     NgxUsefulSwiperModule,
     MatTableModule,
-
+    GoogleMapsModule,
+    ToastrModule.forRoot({
+      preventDuplicates: false,
+      progressBar: true,
+      countDuplicates: true,
+      extendedTimeOut: 3000,
+      positionClass: 'toast-bottom-right',
+    }),
+    FullCalendarModule,
   ],
   providers: [
               authInterceptorProviders, 
               {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
               {provide: HTTP_INTERCEPTORS, useClass: EventInterceptor, multi: true},
               {provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true},
+              ChatService
             ],
   bootstrap: [AppComponent],
   entryComponents: [ErrorComponent, EventDialogComponent]

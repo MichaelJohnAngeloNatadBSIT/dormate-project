@@ -32,7 +32,7 @@ export class UserService {
     return this.http.get(API_URL + 'admin', { responseType: 'text' });
   }
 
-  retrieveUserWithId(id): any{
+  retrieveUserWithId(id:any): any{
     return this.http.get(USER_URL + id);
   }
 

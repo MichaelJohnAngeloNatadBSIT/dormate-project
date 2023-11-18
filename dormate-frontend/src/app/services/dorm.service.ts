@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpEvent, HttpRequest, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Dorm } from '../models/dorms.model';
 
@@ -29,6 +29,10 @@ export class DormService {
 
   get(id: any): Observable<Dorm> {
     return this.http.get<Dorm>(`${baseUrl}/${id}`);
+  }
+
+  getDormById(id: any): Observable<Dorm> {
+    return this.http.get<Dorm>(`${baseUrl}/find_one/${id}`);
   }
 
   create(data: any): Observable<any> {

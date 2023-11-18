@@ -10,16 +10,5 @@ export class Dorm {
     rent?: any;
     for_rent?: boolean;
     published?: boolean;
-    
-    // dorm_images: Array<any>;
-    // dorm_images: string;
+    dorm_images?: any;
 }
-
-//              title: String,
-//           description: String,
-//           address: String,
-//           lessor: String, 
-//           bedroom: Number,
-//           bathroom: Number,
-//           rent: Number,
-//           for_rent: Boolean

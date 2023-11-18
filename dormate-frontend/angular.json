@@ -124,7 +124,7 @@
             "tsConfig": "projects/admin-app/tsconfig.app.json",
             "assets": [
               "projects/admin-app/src/favicon.ico",
-              "src/assets/dormate_logo.png",
+              "projects/admin-app/src/assets/dormate_logo.png",
               "projects/admin-app/src/assets"
             ],
             "styles": [
@@ -188,7 +188,7 @@
             "tsConfig": "projects/admin-app/tsconfig.spec.json",
             "assets": [
               "projects/admin-app/src/favicon.ico",
-              "src/assets/dormate_logo.png",
+              "projects/admin-app/src/assets/dormate_logo.png",
               "projects/admin-app/src/assets"
             ],
             "styles": [

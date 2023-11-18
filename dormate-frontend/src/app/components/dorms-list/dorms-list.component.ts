@@ -4,6 +4,8 @@ import { DormService } from 'src/app/services/dorm.service';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 import { User } from 'src/app/interface/user';
 import { SwiperOptions } from 'swiper';
+import { InfoScheduleDialogComponent } from 'src/app/dialogs/info-schedule-dialog/info-schedule-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-dorms-list',
@@ -22,26 +24,16 @@ export class DormsListComponent implements OnInit{
 
   constructor(
     private dormService: DormService, 
-    private tokenService: TokenStorageService
+    private tokenService: TokenStorageService,
+    private dialog: MatDialog,
     ) { }
   
 
   ngOnInit(): void {
     this.retrieveDorms();
     this.currentUser = this.tokenService.getUser();
-    // this.retrieveUser();
-
   }
 
-  // retrieveUser(){
-  //   this.userService.retrieveUserWithId(this.currentUser.id).subscribe({
-  //     next: (data) => {
-  //       this.user = data;
-  //     },
-  //     error: (e) => console.error(e)
-  //   });
-
-  // }
 
     retrieveDorms(): void {
       this.dormService.getAllApproved()
@@ -51,7 +43,6 @@ export class DormsListComponent implements OnInit{
           },
           error: (e) => console.error(e)
         });
-   
     }
 
     refreshList(): void {
@@ -88,6 +79,14 @@ export class DormsListComponent implements OnInit{
           },
           error: (e) => console.error(e)
         });
+    }
+
+    openInfoSchedDialog(dorm: Dorm){
+      let dialogRef = this.dialog.open(InfoScheduleDialogComponent, { 
+        width: '800px', 
+        height: '70vh',
+        data: {user: this.currentUser, dorm: dorm}
+      }); 
     }
 
     config: SwiperOptions = {

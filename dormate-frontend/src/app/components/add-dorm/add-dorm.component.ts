@@ -50,8 +50,6 @@ export class AddDormComponent {
       });
     }
 
-
-
   submitted = false;
 
   ngOnInit(): void {

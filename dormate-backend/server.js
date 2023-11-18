@@ -4,13 +4,20 @@ const cookieSession = require("cookie-session");
 const dbConfig = require("./app/config/db.config");
 
 
+
 const app = express();
+const http = require('http').createServer(app);
+
+const io = require('socket.io')(http, {
+  cors: {
+    origins: ['http://192.168.1.178:8081']
+  }
+});
 
 global.__basedir = __dirname;
 
 var corsOptions = {
-
-  origin: ["http://192.168.1.178:8081", "http://192.168.1.178:8082", "http://localhost:8081", "http://localhost:8082"],
+  origin: ["http://192.168.1.178:8081", "http://192.168.1.178:8082", "http://localhost:8081", "http://localhost:8082", "https://maps.googleapis.com/maps/api/js?key=AIzaSyB9iFumJZl7P6Y9uITdlTAtGNGNf8P3Exk"],
   credentials: true
 };
 
@@ -37,6 +44,17 @@ app.use(
   })
 );
 
+io.on('connection', (socket) => {
+  console.log('a user connected');
+  socket.on('disconnect', () => {
+    console.log('user disconnected');
+  });
+  socket.on('my message', (msg) => {
+    io.emit('my broadcast', `server: ${msg}`);
+  });
+});
+
+
 // simple route
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to e-Tech application." });
@@ -47,6 +65,7 @@ require("./app/routes/dorm.routes")(app);
 require('./app/routes/auth.routes')(app);
 require('./app/routes/user.routes')(app);
 require('./app/routes/admin.routes')(app);
+require('./app/routes/schedule.routes')(app);
 require('./app/routes/index')(app);
 
 
@@ -54,9 +73,10 @@ require('./app/routes/index')(app);
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
 // const HOSTNAME = "192.168.1.178";
-app.listen( PORT, () => {
+http.listen( PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
+
 
 const db = require("./app/models");
 const Role = db.role;

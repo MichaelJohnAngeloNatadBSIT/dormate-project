@@ -1,5 +1,5 @@
 const db = require("../models");
-const Dormitory = db.dormitory;
+const Dorm = db.dormitory;
 
 const upload = require("../middlewares/dormUpload");
 const uploadCert = require("../middlewares/certificateUpload");
@@ -16,10 +16,7 @@ const url = dbConfig.url;
 const baseUrl = "http://192.168.1.178:8080/api/dorm/dorm_images/";
 const certBaseUrl = "http://192.168.1.178:8080/api/dorm/dorm_images/certificate/"
 
-
 const mongoClient = new MongoClient(url);
-
-const Dorm = db.dormitory;
 
 // Create and Save a new Dormitory
 exports.create = (req, res) => {
@@ -30,7 +27,7 @@ exports.create = (req, res) => {
   }
 
   // Create a Dorm
-  const dormitory = new Dormitory({
+  const dormitory = new Dorm({
     user_id: req.body.user_id,
     title: req.body.title,
     description: req.body.description,
@@ -538,7 +535,7 @@ exports.findAll = (req, res) => {
     }
     : {};
 
-  Dormitory.find(condition)
+  Dorm.find(condition)
     .then((data) => {
       res.send(data);
     })
@@ -556,7 +553,7 @@ exports.findAllApproved = (req, res) => {
       publish: true
     };
 
-  Dormitory.find(condition)
+  Dorm.find(condition)
     .then((data) => {
       res.send(data);
     })
@@ -572,7 +569,7 @@ exports.findAllApproved = (req, res) => {
 exports.findOne = (req, res) => {
   const id = req.params.id;
 
-  Dormitory.findById(id)
+  Dorm.findById(id)
     .then((data) => {
       if (!data)
         res.status(404).send({ message: "Not found Dormitory with id " + id });
@@ -589,7 +586,7 @@ exports.findOne = (req, res) => {
 exports.update = (req, res) => {
   const id = req.params.id;
 
-  Dormitory.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
+  Dorm.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
     .then((data) => {
       if (!data) {
         res.status(404).send({
@@ -608,7 +605,7 @@ exports.update = (req, res) => {
 exports.delete = (req, res) => {
   const id = req.params.id;
 
-  Dormitory.findByIdAndRemove(id)
+  Dorm.findByIdAndRemove(id)
     .then((data) => {
       if (!data) {
         res.status(404).send({
@@ -628,24 +625,24 @@ exports.delete = (req, res) => {
 };
 
 // Delete all Dorm from the database.
-exports.deleteAll = (req, res) => {
-  Dormitory.deleteMany({})
-    .then((data) => {
-      res.send({
-        message: `${data.deletedCount} Dormitory were deleted successfully!`,
-      });
-    })
-    .catch((err) => {
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while removing all dormitory.",
-      });
-    });
-};
+// exports.deleteAll = (req, res) => {
+//   Dorm.deleteMany({})
+//     .then((data) => {
+//       res.send({
+//         message: `${data.deletedCount} Dormitory were deleted successfully!`,
+//       });
+//     })
+//     .catch((err) => {
+//       res.status(500).send({
+//         message:
+//           err.message || "Some error occurred while removing all dormitory.",
+//       });
+//     });
+// };
 
 // Find all published Dormitory
 exports.findAllForRent = (req, res) => {
-  Dormitory.find({ for_rent: true })
+  Dorm.find({ for_rent: true })
     .then((data) => {
       res.send(data);
     })
@@ -659,7 +656,7 @@ exports.findAllForRent = (req, res) => {
 
 exports.findAllForApproval = (req, res) => {
   const id = req.params.id;
-  Dormitory.find({ user_id: id, published: false })
+  Dorm.find({ user_id: id, published: false })
     .then((data) => {
       res.send(data);
     })

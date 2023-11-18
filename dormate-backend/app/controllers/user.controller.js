@@ -14,6 +14,7 @@ const baseUrl = "http://192.168.1.178:8080/user_image/";
 const mongoClient = new MongoClient(url);
 
 const db = require("../models");
+const { user } = require("../models");
 const User = db.user;
 const UserImage = db.user_image;
 
@@ -178,7 +179,16 @@ exports.retrieveUser = (req, res) => {
     .then((data) => {
       if (!data)
         res.status(404).send({ message: "Not found User with id " + id });
-      else res.send(data);
+      else res.send({
+        id: data._id,
+        username: data.username,
+        email: data.email,
+        first_name: data.first_name,
+        last_name: data.last_name,
+        address: data.address,
+        mobile_number: data.mobile_number,
+        user_image: data.user_image,
+      });
     })
     .catch((err) => {
       res.status(500).send({ message: "Error retrieving User with id=" + id });

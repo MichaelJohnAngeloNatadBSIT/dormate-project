@@ -27,9 +27,6 @@ module.exports = app => {
   // Delete a Dorm with id
   router.delete("/delete/:id", dormitory.delete);
 
-  // Delete all Dormitory
-  // router.delete("/", dormitory.deleteAll);
-
   router.post("/create/", dormitory.create);
 
   router.put("/add_images/:id", dormitory.addDormImages);

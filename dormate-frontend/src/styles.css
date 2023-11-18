@@ -23,3 +23,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   ::-webkit-scrollbar-thumb:hover {
     background: #a5aaad;
   }
+
+  .fc .fc-daygrid-day.fc-day-today {
+    background-color: #abc4fc !important;
+  }
