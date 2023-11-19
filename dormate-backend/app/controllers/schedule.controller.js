@@ -69,6 +69,24 @@ exports.findAllScheduleLandlord = (req, res) => {
     });
 };
 
+//retrieve schedule by tenant id and if approved false for landlords
+exports.findAllScheduleTenant = (req, res) => {
+  var condition = { 
+    tenant_id: req.params.id,
+    approve_visit: false
+  };
+  Schedule.find(condition)
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving schedule.",
+      });
+    });
+};
+
 //retrieve schedule by landlord id and if approved true for landlords
 exports.findAllScheduleLandlordApproved = (req, res) => {
   var condition = { 
@@ -86,6 +104,25 @@ exports.findAllScheduleLandlordApproved = (req, res) => {
       });
     });
 };
+
+//retrieve schedule by landlord id and if approved true for landlords
+exports.findAllScheduleTenantApproved = (req, res) => {
+  var condition = { 
+    tenant_id: req.params.id,
+    approve_visit: true
+  };
+  Schedule.find(condition)
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving schedule.",
+      });
+    });
+};
+
 
 // Find a single Schedule with an id
 exports.findOneSchedule = (req, res) => {

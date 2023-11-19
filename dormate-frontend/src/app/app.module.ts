@@ -41,6 +41,7 @@ import { InfoScheduleDialogComponent } from './dialogs/info-schedule-dialog/info
 import { ChatService } from './services/chat.service';
 import { ScheduleApproveComponent } from './dialogs/schedule-approve/schedule-approve.component';
 import { ImageZoomComponent } from './dialogs/image-zoom/image-zoom.component';
+import { ScheduleApproveTenantComponent } from './dialogs/schedule-approve-tenant/schedule-approve-tenant.component';
 
 
 @NgModule({
@@ -68,6 +69,7 @@ import { ImageZoomComponent } from './dialogs/image-zoom/image-zoom.component';
     InfoScheduleDialogComponent,
     ScheduleApproveComponent,
     ImageZoomComponent,
+    ScheduleApproveTenantComponent,
   ],
   imports: [
     BrowserModule,

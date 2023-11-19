@@ -60,13 +60,13 @@ export class AddDormComponent {
     var lessorName = this.currentUser.first_name+' ' + this.currentUser.last_name;
     const data = {
       user_id: this.currentUser.id,
-      title: this.dorm.title,
-      description: this.dorm.description,
-      address: this.dorm.address,
+      title: this.dormForm.get('title').value,
+      description: this.dormForm.get('description').value,
+      address: this.dormForm.get('address').value,
       lessor: lessorName,
-      bedroom: this.dorm.bedroom,
-      bathroom: this.dorm.bathroom,
-      rent: this.dorm.rent,
+      bedroom: this.dormForm.get('bedroom').value,
+      bathroom: this.dormForm.get('bathroom').value,
+      rent: this.dormForm.get('rent').value,
     };
     this.dormService.create(data)
       .subscribe({

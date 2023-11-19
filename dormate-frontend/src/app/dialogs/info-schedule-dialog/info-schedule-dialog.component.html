@@ -74,7 +74,7 @@
   </div>
 </div> -->
 
-  <div class="container">
+  <!-- <div class="container"> -->
     <div
       class="login-wrapper"
       fxLayout="row"
@@ -86,6 +86,7 @@
           <mat-card-header>
             <mat-card-title>Schedule Visit</mat-card-title>
           </mat-card-header>
+          <mat-card-content>
           <form
             class="example-form"
             [formGroup]="form"
@@ -93,7 +94,7 @@
           >
             <mat-card-content>
               <label for="first_name" class="labels-image">
-                <h4>Description</h4>
+                <h4>Visit Description: </h4>
               </label>
               <mat-form-field class="example-full-width">
                 <textarea
@@ -135,8 +136,9 @@
               Schedule A Visit
             </button>
           </form>
+        </mat-card-content>
         </mat-card>
       </div>
     </div>
-  </div>
+  <!-- </div> -->
 

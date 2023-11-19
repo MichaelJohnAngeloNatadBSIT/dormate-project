@@ -7,6 +7,7 @@ import { SwiperOptions } from 'swiper';
 import { InfoScheduleDialogComponent } from 'src/app/dialogs/info-schedule-dialog/info-schedule-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ImageZoomComponent } from 'src/app/dialogs/image-zoom/image-zoom.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dorms-list',
@@ -27,6 +28,7 @@ export class DormsListComponent implements OnInit{
     private dormService: DormService, 
     private tokenService: TokenStorageService,
     private dialog: MatDialog,
+    private router: Router
     ) { }
   
 
@@ -41,6 +43,7 @@ export class DormsListComponent implements OnInit{
         .subscribe({
           next: (data) => {
             this.dorms = data;
+            console.log(this.dorms)
           },
           error: (e) => console.error(e)
         });
@@ -83,11 +86,18 @@ export class DormsListComponent implements OnInit{
     }
 
     openInfoSchedDialog(dorm: Dorm){
+      var isAuthenticated = this.tokenService.isLoggedIn();
+      if (!isAuthenticated) { 
+        this.router.navigate(['/login']); 
+    }
+    else{
       let dialogRef = this.dialog.open(InfoScheduleDialogComponent, { 
         width: '800px', 
         height: '70vh',
         data: {user: this.currentUser, dorm: dorm}
       }); 
+    }
+
     }
 
     openImageZoomDialog(images: any){

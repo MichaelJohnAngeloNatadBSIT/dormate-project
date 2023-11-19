@@ -14,9 +14,8 @@ const baseUrl = "http://192.168.1.178:8080/user_image/";
 const mongoClient = new MongoClient(url);
 
 const db = require("../models");
-const { user } = require("../models");
 const User = db.user;
-const UserImage = db.user_image;
+
 
 exports.allAccess = (req, res) => {
   res.status(200).send("Public Content.");
@@ -166,7 +165,7 @@ exports.findAll = (req, res) => {
     .catch((err) => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while retrieving dormitory.",
+          err.message || "Some error occurred while retrieving users.",
       });
     });
 };

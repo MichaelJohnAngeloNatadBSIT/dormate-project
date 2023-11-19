@@ -21,8 +21,16 @@ export class ScheduleService {
     return this.http.get<Schedule[]>(`${baseUrl}/get_schedule_landlord/${id}`);
   }
 
+  getAllScheduleTenant(id:any): Observable<Schedule[]> {
+    return this.http.get<Schedule[]>(`${baseUrl}/get_schedule_tenant/${id}`);
+  }
+
   getAllScheduleLandlordApproved(id:any): Observable<Schedule[]> {
     return this.http.get<Schedule[]>(`${baseUrl}/get_schedule_approved_landlord/${id}`);
+  }
+
+  getAllScheduleTenantApproved(id:any): Observable<Schedule[]> {
+    return this.http.get<Schedule[]>(`${baseUrl}/get_schedule_approved_tenant/${id}`);
   }
 
   getSchedule(id: any): Observable<Schedule[]> {

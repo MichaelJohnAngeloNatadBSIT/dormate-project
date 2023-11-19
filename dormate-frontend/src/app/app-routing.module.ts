@@ -8,16 +8,19 @@ import { LoginComponent } from './components/login-registration/login/login.comp
 import { ProfileComponent } from './components/profile/profile.component';
 import { BoardUserComponent } from './components/board-user/board-user.component';
 import { BoardLandlordComponent } from './components/board-landlord/board-landlord.component';
+import { AuthGuard } from './services/auth.guard';
+import { InfoScheduleDialogComponent } from './dialogs/info-schedule-dialog/info-schedule-dialog.component';
 
 
 const routes: Routes = [
   { path: '', redirectTo: 'dorms', pathMatch: 'full'},
   { path: 'dorms', component: DormsListComponent },
   { path: 'dorms/:id', component: DormDetailsComponent },
-  { path: 'add', component: AddDormComponent },
+  { path: 'add', component: AddDormComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
+  { path: 'info-schedule', component: InfoScheduleDialogComponent, canActivate: [AuthGuard] },
   { path: 'register', component: RegisterComponent },
-  { path: 'profile', component: ProfileComponent },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'user', component: BoardUserComponent },
   { path: 'landlord', component: BoardLandlordComponent },
 
@@ -29,6 +32,7 @@ const routes: Routes = [
   imports: [
     RouterModule.forRoot(routes), 
   ],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [AuthGuard]
 })
 export class AppRoutingModule { }

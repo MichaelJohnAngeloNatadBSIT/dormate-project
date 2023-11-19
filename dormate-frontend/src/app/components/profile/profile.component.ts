@@ -24,6 +24,7 @@ import interactionPlugin from '@fullcalendar/interaction';
 import timeGrigPlugin from '@fullcalendar/timegrid';
 import { EventInput } from '@fullcalendar/core';
 import { ImageZoomComponent } from 'src/app/dialogs/image-zoom/image-zoom.component';
+import { ScheduleApproveTenantComponent } from 'src/app/dialogs/schedule-approve-tenant/schedule-approve-tenant.component';
 
 
 @Component({
@@ -37,6 +38,7 @@ export class ProfileComponent implements OnInit {
   user : User;
   dorms?: Dorm[];
   schedules?: Schedule[];
+  schedulesTenant?: Schedule[];
   schedulesApproved?: Schedule[];
   calendar_events : EventInput[] = [];
 
@@ -56,8 +58,10 @@ export class ProfileComponent implements OnInit {
     this.retrieveUser();
     this.retrieveForApprovalDorm();
     this.chatService.setupSocketConnection();
-    this.retrieveForApprovalSchedule();
-    this.retrieveForApprovalScheduleApproved()
+    this.retrieveForApprovalScheduleLandlord();
+    this.retrieveForApprovalScheduleTenant();
+    this.retrieveForApprovalScheduleApprovedLandlord()
+    this.retrieveForApprovalScheduleApprovedTenant()
   }
   ngOnDestroy() {
     this.chatService.disconnect();
@@ -103,7 +107,7 @@ export class ProfileComponent implements OnInit {
       });
   }
 
-  retrieveForApprovalSchedule(): void {
+  retrieveForApprovalScheduleLandlord(): void {
     this.scheduleService.getAllScheduleLandlord(this.currentUser.id)
       .subscribe({
         next: (data) => {
@@ -113,11 +117,37 @@ export class ProfileComponent implements OnInit {
       });
   }
 
-  retrieveForApprovalScheduleApproved(): void {
+  retrieveForApprovalScheduleTenant(): void {
+    this.scheduleService.getAllScheduleTenant(this.currentUser.id)
+      .subscribe({
+        next: (data) => {
+          this.schedulesTenant = data;
+        },
+        error: (e) => console.error(e)
+      });
+  }
+
+  retrieveForApprovalScheduleApprovedLandlord(): void {
     this.scheduleService.getAllScheduleLandlordApproved(this.currentUser.id)
       .subscribe({
         next: (data) => {
           this.schedulesApproved = data;
+          this.schedulesApproved.forEach(d =>{
+            this.calendar_events = this.calendar_events.concat(
+              { start: new Date(d.schedule_date), title: d.user_full_name+" will visit "+d.dorm_title, test: 'test' }
+            );
+          })
+        },
+        error: (e) => console.error(e)
+      });
+  }
+
+  retrieveForApprovalScheduleApprovedTenant(): void {
+    this.scheduleService.getAllScheduleTenantApproved(this.currentUser.id)
+      .subscribe({
+        next: (data) => {
+          this.schedulesApproved = data;
+          console.log(this.schedulesApproved);
           this.schedulesApproved.forEach(d =>{
             this.calendar_events = this.calendar_events.concat(
               { start: new Date(d.schedule_date), title: d.user_full_name+" will visit "+d.dorm_title, test: 'test' }
@@ -210,9 +240,17 @@ export class ProfileComponent implements OnInit {
       data: schedule
     }); 
     dialogRef.afterClosed().subscribe(result => { 
-      this.retrieveForApprovalSchedule();
-      this.retrieveForApprovalScheduleApproved();
+      this.retrieveForApprovalScheduleLandlord();
+      this.retrieveForApprovalScheduleApprovedLandlord();
      }); 
+  }
+
+  openScheduleApproveTenantDialog(schedule: Schedule): void{
+    let dialogRef = this.dialog.open(ScheduleApproveTenantComponent, { 
+      width: '500px', 
+      height: '80vh',
+      data: schedule
+    }); 
   }
 
   openImageZoomDialog(images: any){
@@ -234,6 +272,5 @@ export class ProfileComponent implements OnInit {
     },
     spaceBetween: 30
   }; 
-//ADD BUTTON OR LIST FOR VIEW DIALOG OF APPROVED SCHEDULE WITH DIALOG INFO OF USERS
 
 }

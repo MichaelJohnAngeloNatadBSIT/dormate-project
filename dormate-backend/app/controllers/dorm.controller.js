@@ -556,6 +556,7 @@ exports.findAllApproved = (req, res) => {
   Dorm.find(condition)
     .then((data) => {
       res.send(data);
+
     })
     .catch((err) => {
       res.status(500).send({
