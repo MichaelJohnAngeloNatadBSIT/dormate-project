@@ -61,7 +61,62 @@ exports.updateUserImage = async (req, res) => {
             message: `Cannot update User with id=${id}. Maybe User was not found!`,
           });
         }
-        res.send({ message: "User was updated successfully." });
+        res.send({ message: "User Image was updated successfully." });
+      })
+      .catch((err) => {
+        if (err) {
+          res.status(500).send({
+            // message: "Error updating User with id=" + id
+            message:
+              "Error updating User with id=" + id + "user ID is not valid",
+          });
+          console.log("Error updating User with id=" + id);
+        }
+      });
+  } catch (error) {
+    console.log(error);
+    if (error.code === "LIMIT_UNEXPECTED_FILE") {
+      return res.status(400).send({
+        message: "Too many files to upload.",
+      });
+    }
+
+    return res.send({
+      message: `Error when trying upload image: ${error}`,
+    });
+  }
+};
+
+
+exports.updateValidId = async (req, res) => {
+  const id = req.params.id;
+  try {
+    //image uploading
+    await upload(req, res).then();
+
+    if (req.file == undefined) {
+      return res.send({
+        message: "You must select a file.",
+      });
+    }
+
+    var IdImage = baseUrl + req.file.filename;
+    var imageId = req.file.id;
+    image_id_string = imageId.toString();
+
+    //updates user_image field
+    User.findByIdAndUpdate(
+      id,
+      { valid_identification_image: IdImage, valid_image_id: image_id_string },
+      { useFindAndModify: false }
+    )
+      .then((data) => {
+        if (!data) {
+          res.status(404).send({
+            message: `Cannot update User with id=${id}. Maybe User was not found!`,
+          });
+        }
+        res.send({ message: "User Valid ID was updated successfully." });
       })
       .catch((err) => {
         if (err) {
@@ -187,6 +242,7 @@ exports.retrieveUser = (req, res) => {
         address: data.address,
         mobile_number: data.mobile_number,
         user_image: data.user_image,
+        verified: data.verified
       });
     })
     .catch((err) => {

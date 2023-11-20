@@ -14,7 +14,8 @@ const User = mongoose.model(
     image_id: String,
     mobile_number: String,
     verified: Boolean,
-    valid_id_image: String,
+    valid_identification_image: String,
+    valid_image_id: String,
     roles: [
       {
         type: mongoose.Schema.Types.ObjectId,

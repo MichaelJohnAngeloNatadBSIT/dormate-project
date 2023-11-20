@@ -57,6 +57,19 @@ export class UserService {
     return this.http.request(req);
   }
 
+  uploadValidId(id: any, file: File): Observable<HttpEvent<any>> {
+    const formData: FormData = new FormData();
+
+    formData.append('file', file);
+
+    const req = new HttpRequest('PUT', `${USER_URL}update_valid_id/${id}`, formData, {
+      reportProgress: true,
+      responseType: 'json'
+    });
+
+    return this.http.request(req);
+  }
+
   getFiles(): Observable<any> {
     return this.http.get(`${USER_URL}/files`);
   }

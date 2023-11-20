@@ -15,6 +15,7 @@ module.exports = (mongoose) => {
         rent: Number,
         for_rent: Boolean,
         publish: Boolean,
+        contact_number: String,
         dorm_images: [
           {
             type: String,

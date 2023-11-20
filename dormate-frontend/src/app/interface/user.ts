@@ -9,6 +9,7 @@ export interface User {
     user_image: string;
     image_id: String;
     mobile_number: String;
+    verified: any;
 }
 
 

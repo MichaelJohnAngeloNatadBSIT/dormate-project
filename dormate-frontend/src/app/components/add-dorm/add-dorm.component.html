@@ -134,7 +134,49 @@
                   </div>
                 </div>
                 <div class="row">
-                  <div class="col-md-12">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="form_rent"
+                        >Contact Number</label
+                      >
+                      <input
+                        id="form_contact_number"
+                        type="text"
+                        name="contact_number"
+                        class="form-control"
+                        required="required"
+                        rows="4"
+                        data-error="Please enter the contact number for this dorm."
+                        formControlName="contact_number"
+                        [(ngModel)]="dorm.contact_number"
+                        placeholder="Please enter the contact number for this dorm"
+                        ngModel maxlength="13"
+                      />
+                      <!-- <option value="" selected disabled>
+                          --Select Your Issue--
+                        </option>
+                        <option>Request Invoice for order</option>
+                        <option>Request order status</option>
+                        <option>Haven't received cashback yet</option>
+                        <option>Other</option> -->
+                    </div>
+                    <div
+                      *ngIf="
+                        dormForm.controls['contact_number'].invalid &&
+                        (dormForm.controls['contact_number'].dirty ||
+                          dormForm.controls['contact_number'].touched)
+                      "
+                      class="alert alert-danger"
+                    >
+                      <div *ngIf="dormForm.controls['contact_number'].errors.required">
+                        Contact Number is required.
+                      </div>
+                      <div *ngIf="dormForm.controls['contact_number'].errors.maxlength">
+                        It must be not be over 13 characters.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
                     <div class="form-group">
                       <label for="form_rent"
                         >Please specify the rent per month of the dorm *</label

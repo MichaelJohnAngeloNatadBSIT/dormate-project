@@ -56,12 +56,10 @@
 
         <div class="w3-container w3-white">
           <h3>{{ dorm.title }}</h3>
-          <h5>Address: <b>{{ dorm.address }}</b></h5>
+          <h5><i class="fa fa-map-marker" aria-hidden="true"></i> {{ dorm.address }}</h5>
           <h5>Rent Starts at: <b>₱{{ dorm.rent }}</b></h5>
           <p class="text-muted">{{ dorm.description }}</p>
           <p class="w3-large">
-            <i class="fa fa-bath"></i> <i class="fa fa-phone"></i>
-            <i class="fa fa-wifi"></i>
           </p>
           <button
             class="w3-button w3-block w3-indigo w3-margin-bottom"

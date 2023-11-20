@@ -49,7 +49,11 @@
           Mobile Number: <b>{{ user.mobile_number }}</b>
         </p>
         <p>
-          Verified: <b>{{ user.mobile_number }}</b>
+          Verified User: 
+            <b>
+              <i *ngIf="user.verified" class="fa fa-check-circle-o" style="font-size:15px;color:#5687fb">Verified</i>
+              <i *ngIf="!user.verified" class="fa fa-times" style="font-size:15px;color:#94918c">Not Verified</i>
+            </b>
         </p>
         <button
           type="button"

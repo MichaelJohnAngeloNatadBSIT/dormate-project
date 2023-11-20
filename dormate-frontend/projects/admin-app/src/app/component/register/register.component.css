@@ -6,8 +6,8 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
   min-height: 100vh;
-  background-color: #e2e2e2;
-  background: url('../../../assets/interior-bg-register.jpg') no-repeat center center fixed; 
+  background-color: #a1b1d5;
+  /* background: url('../../../assets/interior-bg-register.jpg') no-repeat center center fixed;  */
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -25,6 +25,10 @@ body {
 .login-wrapper {
   height: 100%;
   max-height: 800px;
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+  position: absolute;
 }
 .box {
   position: relative;
@@ -42,6 +46,7 @@ body {
   -ms-transform: scale(1);
   z-index: 5;
   max-width: 500px;
+  left: 50%;
 }
 .box.back {
   transform: scale(.95);
@@ -99,19 +104,3 @@ body {
 .login-wrapper .mat-form-field-appearance-legacy .mat-form-field-infix {
   padding: 0.8375em 0;
 }
-
-/* mat-form-field{
-  mat-error{
-    display: none !important;
-  }
-
-  mat-error:first-child{
-    display: block !important;
-  } */
-
-  /* mat-form-field mat-error {
-    display: none !important;
- }
-  mat-form-field mat-error:first-child {
-    display: block !important;
- } */

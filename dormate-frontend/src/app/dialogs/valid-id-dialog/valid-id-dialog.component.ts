@@ -7,11 +7,12 @@ import { User } from 'src/app/interface/user';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-user-image-dialog',
-  templateUrl: './user-image-dialog.component.html',
-  styleUrls: ['./user-image-dialog.component.css']
+  selector: 'app-valid-id-dialog',
+  templateUrl: './valid-id-dialog.component.html',
+  styleUrls: ['./valid-id-dialog.component.css']
 })
-export class UserImageDialogComponent implements OnInit {
+export class ValidIdDialogComponent implements OnInit  {
+  
   selectedFiles?: FileList;
   currentFile?: File;
   message = '';
@@ -22,7 +23,7 @@ export class UserImageDialogComponent implements OnInit {
   fileInfos?: Observable<any>;
 
   constructor(
-    public dialogRef: MatDialogRef<UserImageDialogComponent>, 
+    public dialogRef: MatDialogRef<ValidIdDialogComponent>, 
     @Inject(MAT_DIALOG_DATA) public data: any,
     private userService: UserService,
     private router: Router,
@@ -62,7 +63,7 @@ export class UserImageDialogComponent implements OnInit {
       if (file) {
         this.currentFile = file;
   
-        this.userService.uploadUserImage(this.data.id, this.currentFile).subscribe(
+        this.userService.uploadValidId(this.data.id, this.currentFile).subscribe(
           (event: any) => {
             if (event.type === HttpEventType.UploadProgress) {
               // this.progress = Math.round(100 * event.loaded / event.total);

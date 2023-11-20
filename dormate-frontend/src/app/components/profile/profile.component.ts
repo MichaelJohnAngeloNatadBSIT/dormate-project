@@ -25,6 +25,7 @@ import timeGrigPlugin from '@fullcalendar/timegrid';
 import { EventInput } from '@fullcalendar/core';
 import { ImageZoomComponent } from 'src/app/dialogs/image-zoom/image-zoom.component';
 import { ScheduleApproveTenantComponent } from 'src/app/dialogs/schedule-approve-tenant/schedule-approve-tenant.component';
+import { ValidIdDialogComponent } from 'src/app/dialogs/valid-id-dialog/valid-id-dialog.component';
 
 
 @Component({
@@ -92,6 +93,7 @@ export class ProfileComponent implements OnInit {
     this.userService.retrieveUserWithId(this.currentUser.id).subscribe({
       next: (data) => {
         this.user = data;
+        console.log(this.user);
       },
       error: (e) => console.error(e)
     });
@@ -183,6 +185,17 @@ export class ProfileComponent implements OnInit {
     let dialogRef = this.dialog.open(UserImageDialogComponent, { 
       width: '900px', 
       height: '80vh',
+      data: this.user
+    }); 
+    dialogRef.afterClosed().subscribe(result => { 
+      this.retrieveUser();
+     }); 
+  }
+  openValidIdDialog(){
+    let dialogRef = this.dialog.open(ValidIdDialogComponent, { 
+      width: '900px', 
+      height: '80vh',
+      data: this.user
     }); 
     dialogRef.afterClosed().subscribe(result => { 
       this.retrieveUser();
@@ -272,5 +285,7 @@ export class ProfileComponent implements OnInit {
     },
     spaceBetween: 30
   }; 
+
+
 
 }

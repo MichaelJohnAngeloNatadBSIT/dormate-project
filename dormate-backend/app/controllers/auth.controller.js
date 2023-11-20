@@ -16,6 +16,7 @@ exports.signup = (req, res) => {
     last_name: req.body.last_name,
     user_image: req.body.user_image,
     mobile_number: req.body.mobile_number,
+    verified: false
   });
 
   user.save((err, user) => {
@@ -116,6 +117,7 @@ exports.signin = (req, res) => {
         address: user.address,
         mobile_number: user.mobile_number,
         image_id: user.image_id,
+        verified: user.verified,
         roles: authorities,
         accessToken: token,
         message: "Logged in Successfully"

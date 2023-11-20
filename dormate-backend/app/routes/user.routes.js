@@ -27,6 +27,7 @@ module.exports = function(app) {
   );
 
   app.put("/user/update_user_image/:id", controller.updateUserImage);
+  app.put("/user/update_valid_id/:id", controller.updateValidId);
   app.put("/user/update_user_details/:id", controller.updateUser);
   app.put("/user/change_password/:id", controller.changePassword);
   app.get("/user/files", controller.getListFiles);

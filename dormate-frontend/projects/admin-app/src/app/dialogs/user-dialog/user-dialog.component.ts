@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AdminService } from 'projects/admin-app/services/admin.service';
 import { DeleteUserDialogComponent } from '../delete-user-dialog/delete-user-dialog.component';
 import { User } from 'src/app/interface/user';
@@ -13,12 +13,14 @@ import { User } from 'src/app/interface/user';
 export class UserDialogComponent implements OnInit {
   public showPassword: boolean = false;
   form: any;
+  verifyUserForm: any;
 
   constructor(
     public dialogRef: MatDialogRef<UserDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private adminService: AdminService,
     private dialog: MatDialog,
+    private fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
@@ -45,6 +47,10 @@ export class UserDialogComponent implements OnInit {
         Validators.maxLength(12),
       ]),
     });
+
+    this.verifyUserForm = this.fb.group({
+      verified: ['true']
+    })
   }
 
   onCancel(): void {
@@ -64,6 +70,21 @@ export class UserDialogComponent implements OnInit {
       error: (e) => console.error(e),
     });
   }
+
+  verifyUser(): void {
+    var message = '';
+    const updateData = this.verifyUserForm.getRawValue();
+
+    this.adminService.updateUser(this.data._id, updateData).subscribe({
+      next: (res) => {
+        message = res.message
+          ? res.message
+          : 'This user was updated successfully!';
+      },
+      error: (e) => console.error(e),
+    });
+  }
+
   togglePasswordVisibility(): void {
     this.showPassword = !this.showPassword;
   }

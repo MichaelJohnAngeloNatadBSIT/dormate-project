@@ -110,6 +110,13 @@ body {
   margin-bottom: 10px;
 }
 
+.dorm_image{
+  width: 100%;
+  max-width: 700px;
+  height: 500px;
+  margin-bottom: 20px;
+}
+
 /* mat-form-field{
   mat-error{
     display: none !important;

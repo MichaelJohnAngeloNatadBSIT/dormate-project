@@ -11,4 +11,5 @@ export class Dorm {
     for_rent?: boolean;
     published?: boolean;
     dorm_images?: any;
+    contact_number?: any;
 }

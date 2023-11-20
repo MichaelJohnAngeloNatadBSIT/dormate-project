@@ -46,7 +46,7 @@ export class AddDormComponent {
          bedroom: ['', [Validators.required, Validators.maxLength(10), Validators.minLength(1)]],
          bathroom: ['', [Validators.required, Validators.maxLength(10), Validators.minLength(1)]],
          rent: ['', [Validators.required, Validators.maxLength(100000), Validators.minLength(100)]],
-
+         contact_number : ['', [Validators.required, Validators.maxLength(13)]]
       });
     }
 
@@ -66,8 +66,10 @@ export class AddDormComponent {
       lessor: lessorName,
       bedroom: this.dormForm.get('bedroom').value,
       bathroom: this.dormForm.get('bathroom').value,
+      contact_number: this.dormForm.get('contact_number').value,
       rent: this.dormForm.get('rent').value,
     };
+
     this.dormService.create(data)
       .subscribe({
         next: (res) => {

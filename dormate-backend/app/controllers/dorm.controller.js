@@ -36,6 +36,7 @@ exports.create = (req, res) => {
     bedroom: req.body.bedroom,
     bathroom: req.body.bathroom,
     rent: req.body.rent,
+    contact_number: req.body.contact_number,
     for_rent: req.body.for_rent ? req.body.for_rent : false,
     dorm_images: req.body.dorm_images,
     publish: false,
@@ -45,6 +46,7 @@ exports.create = (req, res) => {
   dormitory
     .save(dormitory)
     .then((data) => {
+      console.log(data);
       res.send({
         message: "Dormitory post was created successfully.",
       });
@@ -528,14 +530,8 @@ exports.downloadCert = async (req, res) => {
 // Retrieve all Dorm from the database.
 exports.findAll = (req, res) => {
   const title = req.query.title;
-  var condition = title
-    ? { 
-      title: { $regex: new RegExp(title), $options: "i" },
-      publish: true
-    }
-    : {};
 
-  Dorm.find(condition)
+  Dorm.find({ $or: [ { title: {$regex: new RegExp(title), $options: "i" } }, { address: {$regex: new RegExp(title), $options: "i" } } ] })
     .then((data) => {
       res.send(data);
     })
