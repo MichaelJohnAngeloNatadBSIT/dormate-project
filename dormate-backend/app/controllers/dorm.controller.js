@@ -37,6 +37,8 @@ exports.create = (req, res) => {
     bathroom: req.body.bathroom,
     rent: req.body.rent,
     contact_number: req.body.contact_number,
+    username: req.body.username,
+    user_image: req.body.user_image,
     for_rent: req.body.for_rent ? req.body.for_rent : false,
     dorm_images: req.body.dorm_images,
     publish: false,
@@ -561,6 +563,28 @@ exports.findAllApproved = (req, res) => {
       });
     });
 };
+
+
+exports.findAllApprovedDormByUser = (req, res) => {
+  var id = req.params.id
+  var condition = { 
+      user_id: id,
+      publish: true
+    };
+
+  Dorm.find(condition)
+    .then((data) => {
+      res.send(data);
+
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving dormitory.",
+      });
+    });
+};
+
 
 // Find a single Dorm with an id
 exports.findOne = (req, res) => {

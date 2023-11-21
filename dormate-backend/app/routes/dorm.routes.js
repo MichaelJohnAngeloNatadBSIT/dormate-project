@@ -17,6 +17,7 @@ module.exports = app => {
 
   // Retrieve all published Dormitory
   router.get("/for_approval/:id", dormitory.findAllForApproval);
+  router.get("/approved_dorm/:id", dormitory.findAllApprovedDormByUser);
 
   // Retrieve a single Dorm with id
   router.get("/find_one/:id", dormitory.findOne);

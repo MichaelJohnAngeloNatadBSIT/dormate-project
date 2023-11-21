@@ -17,6 +17,38 @@
   height: 300px;
 }
 
+.user-logo{
+  max-width: 50px;
+  max-height: 50px;
+  border-radius: 50%;
+  
+}
+.username{
+  display: flex;
+  align-items:initial;
+  justify-content:left;
+}
+.username p{
+  font-size: 15px;
+  padding: 25px 10px 0;
+}
+
+.username a{
+  font-size: 15px;
+  padding: 25px 10px 0;
+}
+
+.username_link{
+  font-size: 15px;
+  padding: 25px 10px 0;
+}
+
+.username_link:hover{
+  cursor: pointer;
+  color: #0e4ad4;
+}
+
+
 /* W3.CSS 4.15 December 2020 by Jan Egil and Borge Refsnes */
 html {
   box-sizing: border-box;

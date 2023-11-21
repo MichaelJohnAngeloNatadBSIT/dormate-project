@@ -60,6 +60,8 @@ export class AddDormComponent {
     var lessorName = this.currentUser.first_name+' ' + this.currentUser.last_name;
     const data = {
       user_id: this.currentUser.id,
+      username: this.currentUser.username,
+      user_image: this.currentUser.user_image,
       title: this.dormForm.get('title').value,
       description: this.dormForm.get('description').value,
       address: this.dormForm.get('address').value,

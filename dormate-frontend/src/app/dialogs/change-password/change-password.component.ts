@@ -40,7 +40,7 @@ export class ChangePasswordComponent {
     var message = '';
     const formData = this.form.getRawValue();
 
-    this.userService.changePassword(this.data._id, formData)
+    this.userService.changePassword(this.data.id, formData)
       .subscribe({
         next: (res) => {
           message = res.message ? res.message : 'This user was updated successfully!';

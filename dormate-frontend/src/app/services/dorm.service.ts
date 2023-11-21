@@ -23,6 +23,10 @@ export class DormService {
     return this.http.get<Dorm[]>(`${baseUrl}/find_all_approved/`);
   }
 
+  getAllApprovedDormByUser(id:any): Observable<Dorm[]>{
+    return this.http.get<Dorm[]>(`${baseUrl}/approved_dorm/${id}`);
+  }
+
   getForApproval(id: any): Observable<Dorm[]>{
     return this.http.get<Dorm[]>(`${baseUrl}/for_approval/${id}`);
   }
@@ -45,10 +49,6 @@ export class DormService {
 
   delete(id: any): Observable<any> {
     return this.http.delete(`${baseUrl}/delete/${id}`);
-  }
-
-  deleteAll(): Observable<any> {
-    return this.http.delete(baseUrl);
   }
 
   findByTitle(title: any): Observable<Dorm[]> {

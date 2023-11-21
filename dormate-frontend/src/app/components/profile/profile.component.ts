@@ -93,7 +93,6 @@ export class ProfileComponent implements OnInit {
     this.userService.retrieveUserWithId(this.currentUser.id).subscribe({
       next: (data) => {
         this.user = data;
-        console.log(this.user);
       },
       error: (e) => console.error(e)
     });
@@ -149,7 +148,6 @@ export class ProfileComponent implements OnInit {
       .subscribe({
         next: (data) => {
           this.schedulesApproved = data;
-          console.log(this.schedulesApproved);
           this.schedulesApproved.forEach(d =>{
             this.calendar_events = this.calendar_events.concat(
               { start: new Date(d.schedule_date), title: d.user_full_name+" will visit "+d.dorm_title, test: 'test' }

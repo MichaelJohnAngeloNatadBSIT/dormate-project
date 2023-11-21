@@ -5,7 +5,7 @@
         <input
           type="text"
           class="form-control"
-          placeholder="Search by title"
+          placeholder="Search dorm by Title or Address"
           [(ngModel)]="title"
         />
         <div class="input-group-append">
@@ -35,9 +35,15 @@
       <div
         class="w3-third w3-margin-bottom"
         *ngFor="let dorm of dorms; let i = index"
-        [class.active]="i == currentIndex"
-        (click)="setActiveDorm(dorm, i)"
       >
+      
+      <div class="username">
+        <img [src]="dorm.user_image" class="user-logo" alt="user icon"> 
+        <a class="username_link" (click)="visitProfile(dorm.user_id)">{{ dorm.username }} </a>
+        <!-- <app-visit-profile [userId]="dorm.user_id"></app-visit-profile> -->
+      </div>
+
+
         <!-- image slider -->
         <swiper [config]="config">
           <div class="swiper-wrapper" (click)="openImageZoomDialog(dorm.dorm_images)">
@@ -55,6 +61,7 @@
         </swiper>
 
         <div class="w3-container w3-white">
+          <p>{{ dorm.createdAt | date : "MMMM d, y"}}</p>
           <h3>{{ dorm.title }}</h3>
           <h5><i class="fa fa-map-marker" aria-hidden="true"></i> {{ dorm.address }}</h5>
           <h5>Rent Starts at: <b>₱{{ dorm.rent }}</b></h5>

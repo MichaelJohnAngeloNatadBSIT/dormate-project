@@ -10,6 +10,7 @@ import { BoardUserComponent } from './components/board-user/board-user.component
 import { BoardLandlordComponent } from './components/board-landlord/board-landlord.component';
 import { AuthGuard } from './services/auth.guard';
 import { InfoScheduleDialogComponent } from './dialogs/info-schedule-dialog/info-schedule-dialog.component';
+import { VisitProfileComponent } from './components/visit-profile/visit-profile.component';
 
 
 const routes: Routes = [
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: 'info-schedule', component: InfoScheduleDialogComponent, canActivate: [AuthGuard] },
   { path: 'register', component: RegisterComponent },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
+  { path: 'visit-profile', component: VisitProfileComponent, canActivate: [AuthGuard] },
   { path: 'user', component: BoardUserComponent },
   { path: 'landlord', component: BoardLandlordComponent },
 

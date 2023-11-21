@@ -30,6 +30,7 @@ export class EditDialogComponent implements OnInit {
       address: new FormControl('', [Validators.required, Validators.maxLength(100)]),
       mobile_number: new FormControl('', [Validators.required, Validators.maxLength(12)]),
     });
+
   }
 
   onCancel(): void { 
@@ -40,7 +41,7 @@ export class EditDialogComponent implements OnInit {
     var message = '';
     const formData = this.form.getRawValue();
 
-    this.userService.updateUser(this.data._id, formData)
+    this.userService.updateUser(this.data.id, formData)
       .subscribe({
         next: (res) => {
           message = res.message ? res.message : 'This user was updated successfully!';

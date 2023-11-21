@@ -15,7 +15,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./dorms-list.component.css']
 })
 export class DormsListComponent implements OnInit{
-  content?: string;
 
   dorms?: Dorm[];
   currentDorm: Dorm = {};
@@ -28,7 +27,7 @@ export class DormsListComponent implements OnInit{
     private dormService: DormService, 
     private tokenService: TokenStorageService,
     private dialog: MatDialog,
-    private router: Router
+    private router: Router,
     ) { }
   
 
@@ -38,38 +37,23 @@ export class DormsListComponent implements OnInit{
   }
 
 
+
     retrieveDorms(): void {
       this.dormService.getAllApproved()
         .subscribe({
           next: (data) => {
             this.dorms = data;
-            console.log(this.dorms)
           },
           error: (e) => console.error(e)
         });
     }
 
-    refreshList(): void {
-      this.retrieveDorms();
-      this.currentDorm = {};
-      this.currentIndex = -1;
-    }
+    // refreshList(): void {
+    //   this.retrieveDorms();
+    //   this.currentDorm = {};
+    //   this.currentIndex = -1;
+    // }
 
-    setActiveDorm(dorm: Dorm, index: number): void {
-      this.currentDorm = dorm;
-      this.currentIndex = index;
-    }
-
-    removeAllDorms(): void {
-      this.dormService.deleteAll()
-        .subscribe({
-          next: (res) => {
-            console.log(res);
-            this.refreshList();
-          },
-          error: (e) => console.error(e)
-        });
-    }
 
     searchTitle(): void {
       this.currentDorm = {};
@@ -79,7 +63,6 @@ export class DormsListComponent implements OnInit{
         .subscribe({
           next: (data) => {
             this.dorms = data;
-            console.log(data);
           },
           error: (e) => console.error(e)
         });
@@ -106,6 +89,10 @@ export class DormsListComponent implements OnInit{
         height: '70vh',
         data: images
       }); 
+    }
+
+    visitProfile(user_id: any){
+      this.router.navigate(['visit-profile'], {state: {user_id: user_id}})
     }
 
     config: SwiperOptions = {

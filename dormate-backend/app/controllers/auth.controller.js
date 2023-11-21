@@ -117,6 +117,7 @@ exports.signin = (req, res) => {
         address: user.address,
         mobile_number: user.mobile_number,
         image_id: user.image_id,
+        user_image: user.user_image,
         verified: user.verified,
         roles: authorities,
         accessToken: token,
