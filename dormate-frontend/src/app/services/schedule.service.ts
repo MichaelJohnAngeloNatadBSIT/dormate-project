@@ -5,8 +5,8 @@ import { Schedule } from '../models/schedules.model';
 import { environment } from 'src/environments/environment';
 
 
-// const baseUrl = 'http://192.168.1.178:8080/api/schedule';
-const baseUrl = environment.baseURL+'schedule';
+const baseUrl = 'http://192.168.1.178:8080/api/schedule';
+// const baseUrl = environment.baseURL+'schedule';
 
 @Injectable({
   providedIn: 'root'
